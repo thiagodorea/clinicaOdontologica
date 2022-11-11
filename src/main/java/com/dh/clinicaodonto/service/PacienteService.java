@@ -8,7 +8,7 @@ import java.util.List;
 @Service
 public interface PacienteService {
 
-   public List<Paciente> listarPacientes();
+   List<Paciente> listarPacientes();
 
 
 }
