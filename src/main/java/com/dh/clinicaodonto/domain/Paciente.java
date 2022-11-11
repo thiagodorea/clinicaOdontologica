@@ -23,7 +23,7 @@ public class Paciente {
    private Long id;
    private String nome;
    private String sobrenome;
-   private String endereco;
    private String rg;
    private LocalDate dataCadastro;
+   private String endereco;
 }
