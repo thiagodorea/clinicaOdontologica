@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,6 +25,5 @@ public class Paciente {
    private String sobrenome;
    private String endereco;
    private String rg;
-   private LocalDate dataAlta;
-
+   private LocalDate dataCadastro;
 }
