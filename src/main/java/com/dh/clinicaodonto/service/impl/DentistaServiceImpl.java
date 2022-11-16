@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static java.util.Objects.nonNull;
+
 @Slf4j
 @Service
 public class DentistaServiceImpl implements DentistaService {
@@ -43,7 +46,14 @@ public class DentistaServiceImpl implements DentistaService {
 
     @Override
     public Dentista updateDentistaById(Dentista dentista) {
-        return null;
+        log.info("[DentistaService] [updateDentistaById]");
+        try{
+            nonNull(findDentistaById(dentista.getId()).getId());
+            return dentistaRepository.save(dentista);
+        }catch (Exception e){
+            log.error("[DentistaService] [updateDentistaById] Dentista não foi encontrado", e);
+            throw new RuntimeException("[DentistaService] [updateDentistaById] Dentista não foi encontrado");
+        }
     }
 
     @Override
