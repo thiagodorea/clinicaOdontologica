@@ -45,6 +45,7 @@ public class DentistaServiceImpl implements DentistaService {
         return dentistaRepository.save(dentista);
     }
 
+
     @Override
     public Dentista updateDentistaById(Dentista dentista) {
         log.info("[DentistaService] [updateDentistaById]");
