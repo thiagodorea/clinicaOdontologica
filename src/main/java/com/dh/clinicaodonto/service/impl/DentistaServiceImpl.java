@@ -36,8 +36,9 @@ public class DentistaServiceImpl implements DentistaService {
     }
 
     @Override
-    public Dentista saveDentista() {
-        return null;
+    public Dentista saveDentista(Dentista dentista) {
+        log.info("[DentistaService] [saveDentista]");
+        return dentistaRepository.save(dentista);
     }
 
     @Override

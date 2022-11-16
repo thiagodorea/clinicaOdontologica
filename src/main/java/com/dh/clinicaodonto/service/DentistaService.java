@@ -11,7 +11,7 @@ public interface DentistaService {
 
     Dentista findDentistaById(long id);
 
-    Dentista saveDentista();
+    Dentista saveDentista(Dentista dentista);
 
     Dentista updateDentistaById(Dentista dentista);
 
