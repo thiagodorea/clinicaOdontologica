@@ -6,10 +6,14 @@ import com.dh.clinicaodonto.domain.Paciente;
 import java.util.List;
 
 public interface DentistaService {
-    Dentista criar();
-    Dentista editar();
-    Dentista exlcuir();
-    List<Paciente> listarDentistas();
-    Dentista buscarDentista();
 
+    List<Dentista> findAllDenstistas();
+
+    Dentista findDentistaById(long id);
+
+    Dentista saveDentista();
+
+    Dentista updateDentistaById(Dentista dentista);
+
+    void deleteDentista(Dentista dentista);
 }
