@@ -15,5 +15,5 @@ public interface DentistaService {
 
     Dentista updateDentistaById(Dentista dentista);
 
-    void deleteDentista(Dentista dentista);
+    void deleteDentista(long id);
 }

@@ -7,6 +7,7 @@ import com.dh.clinicaodonto.service.DentistaService;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -57,7 +58,14 @@ public class DentistaServiceImpl implements DentistaService {
     }
 
     @Override
-    public void deleteDentista(Dentista dentista) {
-
+    public void deleteDentista(long id) {
+        log.info("[DentistaService] [deleteDentista]");
+        try {
+            nonNull(findDentistaById(id));
+            dentistaRepository.deleteById(id);
+        }catch (DataIntegrityViolationException e){
+            log.error("[DentistaService] [deleteDentista] Error ao excluir Dentista", e);
+            throw new DataIntegrityViolationException("[DentistaService] [deleteDentista] Error ao excluir o Dentista: " + id );
+        }
     }
 }
