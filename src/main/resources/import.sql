@@ -1,10 +1,13 @@
---INSERT INTO dentista VALUES(1,'Marcela','Mirella Laís da Costa','0000001');
---INSERT INTO dentista VALUES(2,'Alícia','Giovanna da Conceição','0000002');
---INSERT INTO dentista VALUES(3,'Marcela','Mirella Laís da Costa','0000003');
---INSERT INTO dentista VALUES(4,'Vanessa','Benedita Porto','0000004');
+INSERT INTO dentista(nome, sobrenome, matricula) VALUES('Marcela','Mirella Laís da Costa','0000001');
+INSERT INTO dentista(nome, sobrenome, matricula)  VALUES('Alícia','Giovanna da Conceição','0000002');
+INSERT INTO dentista(nome, sobrenome, matricula)  VALUES('Marcela','Mirella Laís da Costa','0000003');
+INSERT INTO dentista(nome, sobrenome, matricula)  VALUES('Vanessa','Benedita Porto','0000004');
 
-INSERT INTO paciente(nome, sobrenome, rg, endereco,data_cadastro) VALUES('Elza','Aurora Pinto','38.395.940-8','Rua Francisco Jorge Pedreira, 498, Parque Residencial Piracicaba, Piracicaba-SP','2020-04-07');
-INSERT INTO paciente(nome, sobrenome, rg, endereco,data_cadastro) VALUES('Calebe','Samuel Luan Almada','25.271.333-3','Rua Ema, 430, Conjunto Ouricurí, Piracicaba-SP','2020-04-01');
-INSERT INTO paciente(nome, sobrenome, rg, endereco,data_cadastro) VALUES('Analu','Jennifer Mariana Corte Real','27.738.490-4','Rua São Paulo, 933, Ouro Preto, Piracicaba-SP','2020-04-29');
-INSERT INTO paciente(nome, sobrenome, rg, endereco,data_cadastro) VALUES('Benedito','Julio Brito','23.621.421-4','Vila Miracema, 212, Jurunas, Piracicaba-SP','2020-10-06');
-INSERT INTO paciente(nome, sobrenome, rg, endereco,data_cadastro) VALUES('Isabella','Francisca Araújo','41.923.466-4','Rua Esmirna , 440, Jardim Canaã, Piracicaba-SP','2020-11-06');
+INSERT INTO endereco(cep,logradouro,numero,bairro,localidade,uf) VALUES('01444-080','Rua Padre Jacob Saliba','128','Jardim Paulistano','São Paulo','SP');
+
+INSERT INTO paciente(nome, sobrenome, rg, data_cadastro,endereco_id) VALUES('Elza','Aurora Pinto','38.395.940-8','2020-04-07',1);
+INSERT INTO paciente(nome, sobrenome, rg, data_cadastro,endereco_id) VALUES('Calebe','Samuel Luan Almada','25.271.333-3','2020-04-01',null);
+INSERT INTO paciente(nome, sobrenome, rg, data_cadastro,endereco_id) VALUES('Analu','Jennifer Mariana Corte Real','27.738.490-4','2020-04-29',null);
+INSERT INTO paciente(nome, sobrenome, rg, data_cadastro,endereco_id) VALUES('Benedito','Julio Brito','23.621.421-4','2020-10-06',null);
+INSERT INTO paciente(nome, sobrenome, rg, data_cadastro,endereco_id) VALUES('Isabella','Francisca Araújo','41.923.466-4','2020-11-06',null);
+

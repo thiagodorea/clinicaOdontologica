@@ -8,6 +8,7 @@ import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -36,6 +37,7 @@ public class PacienteServiceImpl implements PacienteService {
    }
 
    @Override
+   @Transactional
    public Paciente savePaciente(Paciente paciente) {
       log.info("[PacienteService] [savePaciente]");
       return pacienteRepository.save(paciente);

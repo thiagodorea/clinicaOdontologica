@@ -3,7 +3,6 @@ package com.dh.clinicaodonto.controller;
 import com.dh.clinicaodonto.domain.Paciente;
 import com.dh.clinicaodonto.service.impl.PacienteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,7 +36,7 @@ public class PacienteController {
    @PostMapping("salvar")
    @ResponseBody
    public ResponseEntity<Paciente> savePaciente(@RequestBody Paciente paciente){
-      return new ResponseEntity<Paciente>(pacienteService.savePaciente(paciente),HttpStatus.CREATED)  ;
+      return ResponseEntity.status(HttpStatus.CREATED).body(pacienteService.savePaciente(paciente));
    }
 
    @PatchMapping("atualizar")
@@ -49,7 +48,7 @@ public class PacienteController {
    @DeleteMapping("deletar/{id}")
    public ResponseEntity<String> deletePaciente(@PathVariable Long id){
       pacienteService.deletePaciente(id);
-      return new ResponseEntity<String>("Paciente "+id +" deletado com sucesso",HttpStatus.OK);
+      return ResponseEntity.status(HttpStatus.OK).body("Paciente "+id +" deletado com sucesso");
    }
 
 }
