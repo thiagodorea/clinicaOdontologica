@@ -36,8 +36,8 @@ public class PacienteController {
    }
    @PostMapping("salvar")
    @ResponseBody
-   public Paciente savePaciente(@RequestBody Paciente paciente){
-      return pacienteService.savePaciente(paciente);
+   public ResponseEntity<Paciente> savePaciente(@RequestBody Paciente paciente){
+      return new ResponseEntity<Paciente>(pacienteService.savePaciente(paciente),HttpStatus.CREATED)  ;
    }
 
    @PatchMapping("atualizar")
@@ -49,7 +49,7 @@ public class PacienteController {
    @DeleteMapping("deletar/{id}")
    public ResponseEntity<String> deletePaciente(@PathVariable Long id){
       pacienteService.deletePaciente(id);
-      return new ResponseEntity<String>("Paciente {id} deletado com sucesso",HttpStatus.OK);
+      return new ResponseEntity<String>("Paciente "+id +" deletado com sucesso",HttpStatus.OK);
    }
 
 }

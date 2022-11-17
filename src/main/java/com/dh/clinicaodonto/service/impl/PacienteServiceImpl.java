@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static java.util.Objects.nonNull;
+
 @Slf4j
 @Service
 public class PacienteServiceImpl implements PacienteService {
@@ -42,19 +44,24 @@ public class PacienteServiceImpl implements PacienteService {
    @Override
    public Paciente updatePacienteById(Paciente paciente) {
       log.info("[PacienteService] [updatePacienteById]");
-
-      return pacienteRepository.save(paciente);
+      try{
+         nonNull(findPacienteById(paciente.getId()).getId());
+         return pacienteRepository.save(paciente);
+      }catch (Exception e){
+         log.error("[PacienteService] [updatePacienteById] Paciente não foi encontrado", e);
+         throw new RuntimeException("[PacienteService] [updatePacienteById] Paciente não foi encontrado");
+      }
    }
 
    @Override
    public void deletePaciente(Long id) {
       log.info("[PacienteService] [deletePaciente]");
-      findPacienteById(id);
       try {
+         nonNull(findPacienteById(id));
          pacienteRepository.deleteById(id);
       }catch (DataIntegrityViolationException e){
-         log.error("Error ao Deletar Paciente", e);
-         throw new DataIntegrityViolationException("[PacienteService] [deletePaciente] Não foi possivel excluir o Paciente: " + id );
+         log.error("[PacienteService] [deletePaciente] Error ao excluir Paciente", e);
+         throw new DataIntegrityViolationException("[PacienteService] [deletePaciente] Error ao excluir o Paciente: " + id );
       }
    }
 
