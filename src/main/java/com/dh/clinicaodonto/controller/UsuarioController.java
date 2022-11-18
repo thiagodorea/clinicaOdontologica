@@ -22,7 +22,6 @@ public class UsuarioController {
     @ResponseBody
     public ResponseEntity<Usuario> criar(@RequestBody Usuario usuario) {
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.saveUsuario(usuario));
-
     }
 
 }

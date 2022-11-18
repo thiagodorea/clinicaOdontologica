@@ -4,7 +4,9 @@ import com.dh.clinicaodonto.domain.Usuario;
 import com.dh.clinicaodonto.repository.UsuarioRepository;
 import com.dh.clinicaodonto.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UsuarioServiceImpl implements UsuarioService {
 
     @Autowired

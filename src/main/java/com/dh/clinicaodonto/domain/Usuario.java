@@ -19,6 +19,7 @@ import javax.persistence.Id;
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String usuario;
     private String password;
     private Boolean isAdmin;
