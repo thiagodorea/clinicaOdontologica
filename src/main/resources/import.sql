@@ -11,3 +11,4 @@ INSERT INTO paciente(nome, sobrenome, rg, data_cadastro,endereco_id) VALUES('Ana
 INSERT INTO paciente(nome, sobrenome, rg, data_cadastro,endereco_id) VALUES('Benedito','Julio Brito','23.621.421-4','2020-10-06',null);
 INSERT INTO paciente(nome, sobrenome, rg, data_cadastro,endereco_id) VALUES('Isabella','Francisca Araújo','41.923.466-4','2020-11-06',null);
 
+INSERT INTO usuario(usuario, passwor, isAdmin) VALUES('Ettore', '1234', false),('Pedro', '1234', true);
