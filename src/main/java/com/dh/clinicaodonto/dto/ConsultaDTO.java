@@ -20,6 +20,6 @@ public class ConsultaDTO {
     @NotBlank
     private DentistaResponseDTO dentista;
     @NotBlank
-    private Timestamp dataHoraAgndamento;
+    private Timestamp dataHoraAgendamento;
 
 }

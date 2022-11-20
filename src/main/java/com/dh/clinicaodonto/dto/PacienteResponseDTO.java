@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -28,7 +29,7 @@ public class PacienteResponseDTO {
     private PasswordDTO usuario;
 
     private Endereco endereco;
-    private Date dataDeCadastro;
+    private LocalDate dataCadastro;
 
 
 }

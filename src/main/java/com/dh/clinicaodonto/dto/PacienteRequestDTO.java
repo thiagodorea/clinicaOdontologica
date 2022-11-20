@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -29,5 +29,5 @@ public class PacienteRequestDTO {
     private UsuarioDTO usuario;
     @NotBlank
     private Endereco endereco;
-    private Date dataDeCadastro;
+    private LocalDate dataCadastro;
 }
