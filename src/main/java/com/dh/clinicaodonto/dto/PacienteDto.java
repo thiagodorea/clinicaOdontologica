@@ -18,16 +18,11 @@ import java.time.LocalDate;
 
 
 
-public class PacienteRequestDTO {
-    @NotBlank
+public class PacienteDto {
     private String nome;
-    @NotBlank
     private String sobrenome;
-    @NotBlank
     private String matricula;
-    @NotBlank
-    private UsuarioDTO usuario;
-    @NotBlank
+    private UsuarioDto usuario;
     private Endereco endereco;
     private LocalDate dataCadastro;
 }
