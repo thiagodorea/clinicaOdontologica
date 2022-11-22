@@ -1,18 +1,20 @@
 package com.dh.clinicaodonto.service.impl;
 
 import com.dh.clinicaodonto.domain.Paciente;
+import com.dh.clinicaodonto.dto.PacienteDto;
 import com.dh.clinicaodonto.repository.PacienteRepository;
 import com.dh.clinicaodonto.service.PacienteService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import static java.util.Objects.nonNull;
 
 @Slf4j
 @Service
@@ -21,49 +23,67 @@ public class PacienteServiceImpl implements PacienteService {
    @Autowired
    private PacienteRepository pacienteRepository;
 
+   ObjectMapper mapper = new ObjectMapper();
+
    @Override
-   public List<Paciente> findAllPacientes() {
+   public List<PacienteDto> findAllPacientes() {
       log.info("[PacienteService] [findAllPacientes]");
-      return pacienteRepository.findAll();
+      List<Paciente> pacientes = pacienteRepository.findAll();
+      List<PacienteDto> pacientesDto = new ArrayList<>();
+      mapper.registerModule(new JavaTimeModule());
+      for(Paciente paciente : pacientes) {
+         pacientesDto.add(mapper.convertValue(paciente, PacienteDto.class));
+      }
+      return pacientesDto;
    }
 
    @Override
-   public Paciente findPacienteById(Long id) {
+   public ResponseEntity<PacienteDto> findPacienteById(Long id) {
       log.info("[PacienteService] [findPacienteById]");
-      return pacienteRepository.findById(id).orElseThrow(() -> {
-         log.error("[PacienteService] [findPacienteById] Paciente não encontrado");
-         throw new ObjectNotFoundException(" Paciente " + id + " não encontrado.", Paciente.class.getName());
-      });
-   }
-
-   @Override
-   @Transactional
-   public Paciente savePaciente(Paciente paciente) {
-      log.info("[PacienteService] [savePaciente]");
-      return pacienteRepository.save(paciente);
-   }
-
-   @Override
-   public Paciente updatePacienteById(Paciente paciente) {
-      log.info("[PacienteService] [updatePacienteById]");
+      mapper.registerModule(new JavaTimeModule());
       try{
-         nonNull(findPacienteById(paciente.getId()).getId());
-         return pacienteRepository.save(paciente);
+         return ResponseEntity.status(HttpStatus.OK).body(mapper.convertValue(pacienteRepository.findById(id).get(),PacienteDto.class));
       }catch (Exception e){
-         log.error("[PacienteService] [updatePacienteById] Paciente não foi encontrado", e);
-         throw new RuntimeException("[PacienteService] [updatePacienteById] Paciente não foi encontrado");
+         log.error("[PacienteService] [findPacienteById] Paciente não localizado");
+         return new ResponseEntity("Paciente não foi localizado",HttpStatus.BAD_REQUEST);
       }
    }
 
    @Override
-   public void deletePaciente(Long id) {
+   @Transactional
+   public ResponseEntity<PacienteDto> savePaciente(Paciente paciente) {
+      log.info("[PacienteService] [savePaciente]");
+      try{
+         mapper.registerModule(new JavaTimeModule());
+         return ResponseEntity.status(HttpStatus.CREATED).body(mapper.convertValue(pacienteRepository.save(paciente),PacienteDto.class));
+      }catch (Exception e){
+         log.error("[PacienteService] [savePaciente] Não foi possível salvar o paciente");
+         return new ResponseEntity("Não foi possível salvar o paciente "+ paciente.getNome(),HttpStatus.BAD_REQUEST);
+      }
+   }
+
+   @Override
+   public ResponseEntity <PacienteDto> updatePacienteById(Paciente paciente) {
+      log.info("[PacienteService] [updatePacienteById]");
+      try{
+            PacienteDto pacienteDto = findPacienteById(paciente.getId()).getBody();
+            mapper.registerModule(new JavaTimeModule());
+            return ResponseEntity.status(HttpStatus.OK).body(mapper.convertValue(pacienteRepository.save(paciente), PacienteDto.class));
+      }catch (Exception e){
+         log.error("[PacienteService] [updatePacienteById] Erro ao atualizar os dados do paciente", e);
+         return new ResponseEntity("Paciente não foi encontrado",HttpStatus.NOT_FOUND);
+      }
+   }
+
+   @Override
+   public ResponseEntity<String> deletePaciente(Long id) {
       log.info("[PacienteService] [deletePaciente]");
       try {
-         nonNull(findPacienteById(id));
          pacienteRepository.deleteById(id);
-      }catch (DataIntegrityViolationException e){
+         return ResponseEntity.status(HttpStatus.OK).body("Paciente " + id +" excluido com sucesso.");
+      }catch (Exception e){
          log.error("[PacienteService] [deletePaciente] Error ao excluir Paciente", e);
-         throw new DataIntegrityViolationException("[PacienteService] [deletePaciente] Error ao excluir o Paciente: " + id );
+         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error ao excluir o paciente: " + id);
       }
    }
 

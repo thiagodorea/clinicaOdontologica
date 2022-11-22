@@ -1,6 +1,7 @@
 package com.dh.clinicaodonto.controller;
 
 import com.dh.clinicaodonto.domain.Paciente;
+import com.dh.clinicaodonto.dto.PacienteDto;
 import com.dh.clinicaodonto.service.impl.PacienteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,23 +26,23 @@ public class PacienteController {
    private PacienteServiceImpl pacienteService;
 
    @GetMapping("listar")
-   public List<Paciente> findAllPacientes(){
+   public List<PacienteDto> findAllPacientes(){
       return pacienteService.findAllPacientes();
    }
 
    @GetMapping("{id}")
-   public Paciente findPacienteById(@PathVariable Long id){
+   public ResponseEntity<PacienteDto> findPacienteById(@PathVariable Long id){
       return pacienteService.findPacienteById(id);
    }
    @PostMapping("salvar")
    @ResponseBody
-   public ResponseEntity<Paciente> savePaciente(@RequestBody Paciente paciente){
-      return ResponseEntity.status(HttpStatus.CREATED).body(pacienteService.savePaciente(paciente));
+   public ResponseEntity<PacienteDto> savePaciente(@RequestBody Paciente paciente){
+      return pacienteService.savePaciente(paciente);
    }
 
    @PatchMapping("atualizar")
    @ResponseBody
-   public Paciente updatePacienteById(@RequestBody Paciente paciente){
+   public ResponseEntity<PacienteDto> updatePacienteById(@RequestBody Paciente paciente){
       return pacienteService.updatePacienteById(paciente);
    }
 

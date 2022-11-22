@@ -1,28 +1,21 @@
 package com.dh.clinicaodonto.dto;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.NotBlank;
-
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-
-public class DentistaRequestDTO {
-    @NotBlank
-    private String nome;
-    @NotBlank
-    private String sobrenome;
-    @NotBlank
-    private String matricula;
-    @NotBlank
-    private UsuarioDTO usuario;
-
+public class EnderecoDto {
+   private String cep;
+   private String logradouro;
+   private String numero;
+   private String bairro;
+   private String localidade;
+   private String uf;
 }

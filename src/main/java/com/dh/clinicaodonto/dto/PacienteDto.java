@@ -7,27 +7,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-
-
-
-public class PacienteRequestDTO {
-    @NotBlank
+public class PacienteDto {
     private String nome;
-    @NotBlank
     private String sobrenome;
-    @NotBlank
-    private String matricula;
-    @NotBlank
-    private UsuarioDTO usuario;
-    @NotBlank
-    private Endereco endereco;
+    private String rg;
     private LocalDate dataCadastro;
+    private EnderecoDto endereco;
 }

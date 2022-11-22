@@ -1,6 +1,8 @@
 package com.dh.clinicaodonto.service;
 
 import com.dh.clinicaodonto.domain.Paciente;
+import com.dh.clinicaodonto.dto.PacienteDto;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,10 +11,10 @@ import java.util.Optional;
 @Service
 public interface PacienteService {
 
-   List<Paciente> findAllPacientes();
-   Paciente findPacienteById(Long id);
-   Paciente savePaciente(Paciente paciente);
-   Paciente updatePacienteById(Paciente paciente);
-   void deletePaciente(Long id);
+   List<PacienteDto> findAllPacientes();
+   ResponseEntity<PacienteDto> findPacienteById(Long id);
+   ResponseEntity<PacienteDto> savePaciente(Paciente paciente);
+   ResponseEntity<PacienteDto> updatePacienteById(Paciente paciente);
+   ResponseEntity<String> deletePaciente(Long id);
 
 }
