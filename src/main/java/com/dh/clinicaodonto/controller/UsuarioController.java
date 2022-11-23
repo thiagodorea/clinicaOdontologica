@@ -6,6 +6,7 @@ import com.dh.clinicaodonto.service.impl.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,11 +14,11 @@ import org.springframework.web.bind.annotation.*;
 public class UsuarioController {
 
     @Autowired
-    UsuarioServiceImpl usuarioService;
+    private UsuarioServiceImpl usuarioService;
 
     @PostMapping("login")
-    public ResponseEntity<String> login(String email, String password) {
-        return usuarioService.login(email,password);
+    public ResponseEntity<UsuarioDto> login(String username, String password) {
+        return usuarioService.login(username,password);
     }
 
     @PostMapping("criar")
