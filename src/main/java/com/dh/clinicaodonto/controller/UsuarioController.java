@@ -15,7 +15,8 @@ public class UsuarioController {
     UsuarioServiceImpl usuarioService;
 
     @PostMapping("login")
-    public void login() {
+    public ResponseEntity login(String email, String password) {
+        return ResponseEntity.ok("Foi");
     }
 
     @PostMapping("criar")

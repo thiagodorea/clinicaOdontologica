@@ -2,14 +2,22 @@ package com.dh.clinicaodonto.service.impl;
 
 import com.dh.clinicaodonto.domain.Dentista;
 import com.dh.clinicaodonto.domain.Paciente;
+import com.dh.clinicaodonto.dto.DentistaDto;
+import com.dh.clinicaodonto.dto.PacienteDto;
 import com.dh.clinicaodonto.repository.DentistaRepository;
 import com.dh.clinicaodonto.service.DentistaService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Objects.nonNull;
@@ -17,56 +25,69 @@ import static java.util.Objects.nonNull;
 @Slf4j
 @Service
 public class DentistaServiceImpl implements DentistaService {
-
+    ObjectMapper mapper = new ObjectMapper();
     @Autowired
     private DentistaRepository dentistaRepository;
 
-
-
     @Override
-    public List<Dentista> findAllDenstistas() {
-        return dentistaRepository.findAll();
+    public List<DentistaDto> findAllDenstistas() {
+        log.info("[DentistaService] [findAllDentistas]");
+        List<Dentista> dentistas = dentistaRepository.findAll();
+        List<DentistaDto> dentistasDto = new ArrayList<>();
+        mapper.registerModule(new JavaTimeModule());
+        for(Dentista dentista : dentistas) {
+            dentistasDto.add(mapper.convertValue(dentista, DentistaDto.class));
+        }
+        return dentistasDto;
     }
 
-
-
     @Override
-    public Dentista findDentistaById(long id) {
+    public ResponseEntity<DentistaDto> findDentistaById(long id) {
         log.info("[DentistaService] [findDentistaById]");
-        return dentistaRepository.findById(id).orElseThrow( () -> {
-            log.error("[DentistaService] [findDentistaById] Dentista não encontrado");
-            throw new ObjectNotFoundException(" Dentista "+ id + " não encontrado.", Dentista.class.getName());
-        });
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(mapper.convertValue(dentistaRepository.findById(id), DentistaDto.class));
+        } catch (Exception e) {
+            return new ResponseEntity("não foi localizado o dentista",HttpStatus.BAD_REQUEST);
+        }
+
     }
 
     @Override
-    public Dentista saveDentista(Dentista dentista) {
+    @Transactional
+    public ResponseEntity<DentistaDto> saveDentista(Dentista dentista) {
         log.info("[DentistaService] [saveDentista]");
-        return dentistaRepository.save(dentista);
+
+        try {
+            mapper.registerModule(new JavaTimeModule());
+            return ResponseEntity.status(HttpStatus.CREATED).body(mapper.convertValue(dentistaRepository.save(dentista), DentistaDto.class));
+        }catch (Exception e) {
+            log.error("[DentistaService] [saveDentista] Não foi possível salvar o dentista");
+            return new ResponseEntity("Não foi possível salvar o dentista "+ dentista.getNome(),HttpStatus.BAD_REQUEST);
+        }
+
     }
-
-
     @Override
-    public Dentista updateDentistaById(Dentista dentista) {
+    public ResponseEntity<DentistaDto> updateDentistaById(Dentista dentista) {
         log.info("[DentistaService] [updateDentistaById]");
         try{
-            nonNull(findDentistaById(dentista.getId()).getId());
-            return dentistaRepository.save(dentista);
+            DentistaDto dentistaDto = findDentistaById(dentista.getId()).getBody();
+            mapper.registerModule(new JavaTimeModule());
+            return ResponseEntity.status(HttpStatus.OK).body(mapper.convertValue(dentistaRepository.save(dentista), DentistaDto.class));
         }catch (Exception e){
             log.error("[DentistaService] [updateDentistaById] Dentista não foi encontrado", e);
-            throw new RuntimeException("[DentistaService] [updateDentistaById] Dentista não foi encontrado");
+            return new ResponseEntity("Dentista não foi encontrado",HttpStatus.NOT_FOUND);
         }
     }
 
     @Override
-    public void deleteDentista(long id) {
+    public ResponseEntity<String> deleteDentista(long id) {
         log.info("[DentistaService] [deleteDentista]");
         try {
-            nonNull(findDentistaById(id));
             dentistaRepository.deleteById(id);
-        }catch (DataIntegrityViolationException e){
+            return ResponseEntity.status(HttpStatus.OK).body("Dentista excluido com sucesso.");
+        }catch (Exception e){
             log.error("[DentistaService] [deleteDentista] Error ao excluir Dentista", e);
-            throw new DataIntegrityViolationException("[DentistaService] [deleteDentista] Error ao excluir o Dentista: " + id );
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error ao excluir o Dentista" );
         }
     }
 }
