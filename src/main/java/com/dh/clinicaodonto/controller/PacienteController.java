@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,13 +20,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("paciente")
+@RequestMapping("pacientes")
 public class PacienteController {
 
    @Autowired
    private PacienteServiceImpl pacienteService;
 
-   @GetMapping("listar")
+   @GetMapping()
    public List<PacienteDto> findAllPacientes(){
       return pacienteService.findAllPacientes();
    }
@@ -34,19 +35,19 @@ public class PacienteController {
    public ResponseEntity<PacienteDto> findPacienteById(@PathVariable Long id){
       return pacienteService.findPacienteById(id);
    }
-   @PostMapping("salvar")
+   @PostMapping()
    @ResponseBody
    public ResponseEntity<PacienteDto> savePaciente(@RequestBody Paciente paciente){
       return pacienteService.savePaciente(paciente);
    }
 
-   @PatchMapping("atualizar")
+   @PutMapping()
    @ResponseBody
    public ResponseEntity<PacienteDto> updatePacienteById(@RequestBody Paciente paciente){
       return pacienteService.updatePacienteById(paciente);
    }
 
-   @DeleteMapping("deletar/{id}")
+   @DeleteMapping("{id}")
    public ResponseEntity<String> deletePaciente(@PathVariable Long id){
       return pacienteService.deletePaciente(id);
    }

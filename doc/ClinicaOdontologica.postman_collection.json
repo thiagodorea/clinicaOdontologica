@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "3fabc7cb-57cd-452c-9a62-0d6469eb8e65",
+		"_postman_id": "444ebdfc-4816-4e7b-a203-7c92e8cc30f2",
 		"name": "ClinicaOdontologica",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "17147919"
+		"_exporter_id": "10174062"
 	},
 	"item": [
 		{
@@ -15,14 +15,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/dentista/3",
-							"protocol": "http",
+							"raw": "{{host}}/dentistas/3",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "8080",
 							"path": [
-								"dentista",
+								"dentistas",
 								"3"
 							]
 						}
@@ -35,15 +33,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/dentista/listar",
-							"protocol": "http",
+							"raw": "{{host}}/dentistas",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "8080",
 							"path": [
-								"dentista",
-								"listar"
+								"dentistas"
 							]
 						}
 					},
@@ -64,15 +59,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/dentista/salvar",
-							"protocol": "http",
+							"raw": "{{host}}/dentistas",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "8080",
 							"path": [
-								"dentista",
-								"salvar"
+								"dentistas"
 							]
 						}
 					},
@@ -84,15 +76,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/dentista/deletar/3",
-							"protocol": "http",
+							"raw": "{{host}}/dentistas/3",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "8080",
 							"path": [
-								"dentista",
-								"deletar",
+								"dentistas",
 								"3"
 							]
 						}
@@ -102,11 +91,11 @@
 				{
 					"name": "Atualizar",
 					"request": {
-						"method": "PATCH",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n \"id\": \"3\",   \r\n \"nome\" : \"Ettore\",\r\n \"sobrenome\" : \"Muniz\",\r\n \"matricula\" : \"345468\"\r\n}",
+							"raw": "{\r\n \"id\": 1,   \r\n \"nome\" : \"Ettore\",\r\n \"sobrenome\" : \"Muniz\",\r\n \"matricula\" : \"345468\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -114,15 +103,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/dentista/atualizar",
-							"protocol": "http",
+							"raw": "{{host}}/dentistas",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "8080",
 							"path": [
-								"dentista",
-								"atualizar"
+								"dentistas"
 							]
 						}
 					},
@@ -131,125 +117,126 @@
 			]
 		},
 		{
-			"name": "PACIENTE - Listar por id",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Paciente",
+			"item": [
+				{
+					"name": "PACIENTE - Listar por id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/pacientes/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"pacientes",
+								"2"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "{{host}}/paciente/1",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"paciente",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "PACIENTE - Listar todos",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{host}}/paciente/listar",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"paciente",
-						"listar"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "PACIENTE - Novo",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": " {\r\n    \"nome\": \"Larissa\",\r\n    \"sobrenome\": \"Natália Rodrigues\",\r\n    \"rg\": \"25.166.036-9\",\r\n    \"dataCadastro\": \"2022-16-11\",\r\n    \"endereco\": {\r\n        \"cep\": \"05546-030\",\r\n        \"logradouro\": \"Praça Professor Vasco de Andrade\",\r\n        \"numero\": \"427\",\r\n        \"bairro\": \"Jardim Cláudia\",\r\n        \"localidade\": \"São Paulo\",\r\n        \"uf\": \"SP\"\r\n    }\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "PACIENTE - Listar todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/pacientes",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"pacientes"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "{{host}}/paciente/salvar",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"paciente",
-						"salvar"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "PACIENTE - Deletar ",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{host}}/paciente/deletar/2",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"paciente",
-						"deletar",
-						"2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "PACIENTE - Atualizar",
-			"request": {
-				"method": "PATCH",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"id\": 2,\r\n    \"nome\": \"Calebe\",\r\n    \"sobrenome\": \"Samuel Luan Almada\",\r\n    \"rg\": \"25.271.333-3\",\r\n    \"dataCadastro\": \"2020-04-01\",\r\n    \"endereco\": {\r\n        \"cep\": \"05546-030\",\r\n        \"logradouro\": \"Praça Professor Vasco de Andrade\",\r\n        \"numero\": \"427\",\r\n        \"bairro\": \"Jardim Cláudia\",\r\n        \"localidade\": \"São Paulo\",\r\n        \"uf\": \"SP\"\r\n    }\r\n}\r\n",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "PACIENTE - Novo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"nome\": \"Larissa\",\r\n    \"sobrenome\": \"Natália Rodrigues\",\r\n    \"rg\": \"25.166.036-9\",\r\n    \"dataCadastro\": \"2022-11-16\",\r\n    \"endereco\": {\r\n        \"cep\": \"05546-030\",\r\n        \"logradouro\": \"Praça Professor Vasco de Andrade\",\r\n        \"numero\": \"427\",\r\n        \"bairro\": \"Jardim Cláudia\",\r\n        \"localidade\": \"São Paulo\",\r\n        \"uf\": \"SP\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/pacientes",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"pacientes"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "{{host}}/paciente/atualizar",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"paciente",
-						"atualizar"
-					]
+				{
+					"name": "PACIENTE - Deletar ",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/pacientes/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"pacientes",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PACIENTE - Atualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 2,\r\n    \"nome\": \"Calebe\",\r\n    \"sobrenome\": \"Samuel Luan Almada\",\r\n    \"rg\": \"25.271.333-3\",\r\n    \"dataCadastro\": \"2020-04-01\",\r\n    \"endereco\": {\r\n        \"cep\": \"05546-030\",\r\n        \"logradouro\": \"Praça Professor Vasco de Andrade\",\r\n        \"numero\": \"427\",\r\n        \"bairro\": \"Jardim Cláudia\",\r\n        \"localidade\": \"São Paulo\",\r\n        \"uf\": \"SP\"\r\n    }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/pacientes",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"pacientes"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		}
 	]
 }

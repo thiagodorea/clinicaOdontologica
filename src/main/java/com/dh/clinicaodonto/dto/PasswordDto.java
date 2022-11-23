@@ -15,7 +15,7 @@ import javax.validation.constraints.NotBlank;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 
-public class PasswordDTO {
+public class PasswordDto {
     @NotBlank
     private String username;
 }
