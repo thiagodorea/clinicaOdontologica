@@ -42,10 +42,11 @@ public class DentistaServiceImpl implements DentistaService {
     }
 
     @Override
-    public ResponseEntity<DentistaDto> findDentistaById(long id) {
+    public ResponseEntity<DentistaDto> findDentistaById(Long id) {
         log.info("[DentistaService] [findDentistaById]");
+        mapper.registerModule(new JavaTimeModule());
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(mapper.convertValue(dentistaRepository.findById(id), DentistaDto.class));
+            return ResponseEntity.status(HttpStatus.OK).body(mapper.convertValue(dentistaRepository.findById(id).get(), DentistaDto.class));
         } catch (Exception e) {
             return new ResponseEntity("não foi localizado o dentista",HttpStatus.BAD_REQUEST);
         }

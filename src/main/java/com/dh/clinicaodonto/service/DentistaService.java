@@ -11,7 +11,7 @@ public interface DentistaService {
 
     List<DentistaDto> findAllDenstistas();
 
-    ResponseEntity<DentistaDto> findDentistaById(long id);
+    ResponseEntity<DentistaDto> findDentistaById(Long id);
 
     ResponseEntity<DentistaDto> saveDentista(Dentista dentista);
 

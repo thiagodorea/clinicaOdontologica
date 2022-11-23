@@ -1,6 +1,7 @@
 package com.dh.clinicaodonto.controller;
 
 import com.dh.clinicaodonto.domain.Usuario;
+import com.dh.clinicaodonto.dto.UsuarioDto;
 import com.dh.clinicaodonto.service.impl.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,14 +16,14 @@ public class UsuarioController {
     UsuarioServiceImpl usuarioService;
 
     @PostMapping("login")
-    public ResponseEntity login(String email, String password) {
-        return ResponseEntity.ok("Foi");
+    public ResponseEntity<String> login(String email, String password) {
+        return usuarioService.login(email,password);
     }
 
     @PostMapping("criar")
     @ResponseBody
-    public ResponseEntity<Usuario> criar(@RequestBody Usuario usuario) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.saveUsuario(usuario));
+    public ResponseEntity<UsuarioDto> criar(@RequestBody Usuario usuario) {
+        return usuarioService.saveUsuario(usuario);
     }
 
 }
