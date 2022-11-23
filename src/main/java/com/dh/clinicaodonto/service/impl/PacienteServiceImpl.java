@@ -82,8 +82,8 @@ public class PacienteServiceImpl implements PacienteService {
          pacienteRepository.deleteById(id);
          return ResponseEntity.status(HttpStatus.OK).body("Paciente " + id +" excluido com sucesso.");
       }catch (Exception e){
-         log.error("[PacienteService] [deletePaciente] Error ao excluir Paciente", e);
-         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error ao excluir o paciente: " + id);
+         log.error("[PacienteService] [deletePaciente] Não foi possível excluir Paciente", e);
+         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Não foi possível  excluir o paciente: " + id);
       }
    }
 

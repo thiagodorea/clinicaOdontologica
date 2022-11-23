@@ -19,7 +19,7 @@ public class DentistaController {
     @Autowired
     private DentistaServiceImpl dentistaService;
 
-    @GetMapping("listar")
+    @GetMapping()
     public List<DentistaDto> findAllDentistas(){
         return dentistaService.findAllDenstistas();
     }
@@ -28,21 +28,20 @@ public class DentistaController {
     public ResponseEntity<DentistaDto> findDentistaById(@PathVariable Long id){
         return dentistaService.findDentistaById(id);
     }
-    @PostMapping("salvar")
+    @PostMapping()
     @ResponseBody
     public ResponseEntity<DentistaDto> saveDentista(@RequestBody Dentista dentista){
         return dentistaService.saveDentista(dentista);
     }
 
-    @PatchMapping("atualizar")
+    @PutMapping()
     @ResponseBody
     public ResponseEntity<DentistaDto> updateDentistaById(@RequestBody Dentista dentista){
         return dentistaService.updateDentistaById(dentista);
     }
 
-    @DeleteMapping("deletar/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<String> deleteDentista(@PathVariable Long id){
-        dentistaService.deleteDentista(id);
-        return new ResponseEntity<String>("Delete "+id +" deletado com sucesso",HttpStatus.OK);
+        return dentistaService.deleteDentista(id);
     }
 }
