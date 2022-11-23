@@ -2,18 +2,20 @@ package com.dh.clinicaodonto.service;
 
 import com.dh.clinicaodonto.domain.Dentista;
 import com.dh.clinicaodonto.domain.Paciente;
+import com.dh.clinicaodonto.dto.DentistaDto;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface DentistaService {
 
-    List<Dentista> findAllDenstistas();
+    List<DentistaDto> findAllDenstistas();
 
-    Dentista findDentistaById(long id);
+    ResponseEntity<DentistaDto> findDentistaById(Long id);
 
-    Dentista saveDentista(Dentista dentista);
+    ResponseEntity<DentistaDto> saveDentista(Dentista dentista);
 
-    Dentista updateDentistaById(Dentista dentista);
+    ResponseEntity<DentistaDto> updateDentistaById(Dentista dentista);
 
-    void deleteDentista(long id);
+    ResponseEntity<String> deleteDentista(long id);
 }
