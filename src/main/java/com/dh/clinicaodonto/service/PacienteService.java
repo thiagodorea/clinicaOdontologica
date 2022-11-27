@@ -13,6 +13,7 @@ public interface PacienteService {
 
    List<PacienteDto> findAllPacientes();
    ResponseEntity<PacienteDto> findPacienteById(Long id);
+   ResponseEntity<PacienteDto> findByRg(String rg);
    ResponseEntity<PacienteDto> savePaciente(Paciente paciente);
    ResponseEntity<PacienteDto> updatePacienteById(Paciente paciente);
    ResponseEntity<String> deletePaciente(Long id);
