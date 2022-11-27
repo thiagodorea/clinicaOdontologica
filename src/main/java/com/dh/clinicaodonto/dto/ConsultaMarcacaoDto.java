@@ -7,17 +7,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class EnderecoDto {
-   private String cep;
-   private String logradouro;
-   private String numero;
-   private String bairro;
-   private String localidade;
-   private String uf;
+public class ConsultaMarcacaoDto {
+   private Long id;
+   private LocalDateTime dhConsulta;
+   private String rgPaciente;
+   private String  matriculaDentista;
 }

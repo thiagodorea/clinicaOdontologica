@@ -31,9 +31,13 @@ public class PacienteController {
       return pacienteService.findAllPacientes();
    }
 
-   @GetMapping("{id}")
+   @GetMapping("id/{id}")
    public ResponseEntity<PacienteDto> findPacienteById(@PathVariable Long id){
       return pacienteService.findPacienteById(id);
+   }
+   @GetMapping("{rg}")
+   public ResponseEntity<PacienteDto> findByRg(@PathVariable String rg){
+      return pacienteService.findByRg(rg);
    }
    @PostMapping()
    @ResponseBody
