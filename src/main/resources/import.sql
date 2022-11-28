@@ -11,5 +11,9 @@ INSERT INTO paciente(nome, sobrenome, rg, data_cadastro,endereco_id) VALUES('Ana
 INSERT INTO paciente(nome, sobrenome, rg, data_cadastro,endereco_id) VALUES('Benedito','Julio Brito','236214214','2020-10-06',null);
 INSERT INTO paciente(nome, sobrenome, rg, data_cadastro,endereco_id) VALUES('Isabella','Francisca Araújo','419234664','2020-11-06',null);
 
+INSERT INTO consulta(paciente_id, dentista_id, dh_consulta) VALUES(1,2, '2022-12-29 11:00');
+INSERT INTO consulta(paciente_id, dentista_id, dh_consulta) VALUES(2,1, '2022-12-29 09:00');
+INSERT INTO consulta(paciente_id, dentista_id, dh_consulta) VALUES(3,3, '2022-12-29 10:00');
+
 INSERT INTO usuario(username, password, is_admin) VALUES('Ettore', '1234', false);
 INSERT INTO usuario(username, password, is_admin) VALUES('Pedro', '1234', true);
