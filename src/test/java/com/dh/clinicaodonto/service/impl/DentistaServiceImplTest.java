@@ -1,14 +1,18 @@
 package com.dh.clinicaodonto.service.impl;
 
 import com.dh.clinicaodonto.domain.Dentista;
+import com.dh.clinicaodonto.domain.Endereco;
+import com.dh.clinicaodonto.domain.Paciente;
 import com.dh.clinicaodonto.dto.DentistaDto;
 import com.dh.clinicaodonto.service.DentistaService;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.time.LocalDate;
+
+import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class DentistaServiceImplTest {
     @Autowired
@@ -16,6 +20,11 @@ class DentistaServiceImplTest {
 
     DentistaDto dentistaRetorno = new DentistaDto();
 
+    @BeforeAll
+    void CreateDestista() {
+        Dentista dentistaTeste = new Dentista(1l,"DentistaTeste", "Teste", "123");
+        service.saveDentista(dentistaTeste);
+    }
     @Test
     void findAllDenstistas() {
         assertTrue(service.findAllDenstistas().size() > 0);
@@ -23,7 +32,8 @@ class DentistaServiceImplTest {
 
     @Test
     void findDentistaById() {
-        DentistaDto dentista = service.findDentistaById(1L).getBody();
+        DentistaDto dentista = service.findDentistaByMatricula("321").getBody();
+        System.out.println(dentista.getNome());
         assertEquals("Marcela",dentista.getNome());
     }
 
@@ -43,7 +53,7 @@ class DentistaServiceImplTest {
 
     @Test
     void deleteDentista() {
-        assertEquals(200,service.deleteDentista(4l).getStatusCode().value());
-        assertEquals(400,service.deleteDentista(0l).getStatusCode().value());
+        assertEquals(200,service.deleteDentista("123").getStatusCode().value());
+        assertEquals(400,service.deleteDentista("321").getStatusCode().value());
     }
 }

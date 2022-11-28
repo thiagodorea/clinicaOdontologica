@@ -9,7 +9,6 @@ import lombok.ToString;
 
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,10 +30,9 @@ public class Paciente {
    private Long id;
    private String nome;
    private String sobrenome;
-   @Column(unique = true, nullable = false,length = 10)
    private String rg;
    private LocalDate dataCadastro;
-   @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
+   @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
    @JoinColumn(name = "endereco_id")
    private Endereco endereco;
 }
