@@ -7,16 +7,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -25,16 +23,15 @@ import java.time.LocalDate;
 @ToString
 @EqualsAndHashCode
 @Entity
-public class Paciente {
+public class Consulta {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
-   private String nome;
-   private String sobrenome;
-   @Column(unique = true, nullable = false,length = 10)
-   private String rg;
-   private LocalDate dataCadastro;
-   @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
-   @JoinColumn(name = "endereco_id")
-   private Endereco endereco;
+   @OneToOne
+   @JoinColumn(name = "paciente_id")
+   private Paciente paciente;
+   @ManyToOne
+   @JoinColumn(name = "dentista_id")
+   private Dentista dentista;
+   private LocalDateTime dhConsulta;
 }

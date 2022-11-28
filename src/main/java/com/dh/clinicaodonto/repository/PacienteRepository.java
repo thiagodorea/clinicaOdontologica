@@ -4,7 +4,10 @@ import com.dh.clinicaodonto.domain.Paciente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface PacienteRepository extends JpaRepository<Paciente, Long> {
-    Paciente findByRg(String rg);
+
+   Optional<Paciente> findByRg(String rg);
 }

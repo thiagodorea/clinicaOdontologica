@@ -14,7 +14,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("dentistas")
-@CrossOrigin
 public class DentistaController {
 
     @Autowired
@@ -25,10 +24,16 @@ public class DentistaController {
         return dentistaService.findAllDenstistas();
     }
 
-    @GetMapping("{matricula}")
-    public ResponseEntity<DentistaDto> findDentistaByMatricula(@PathVariable String matricula){
-        return dentistaService.findDentistaByMatricula(matricula);
+    @GetMapping("id/{id}")
+    public ResponseEntity<DentistaDto> findDentistaById(@PathVariable Long id){
+        return dentistaService.findDentistaById(id);
     }
+
+    @GetMapping("{matricula}")
+    public ResponseEntity<DentistaDto> findByMatricula(@PathVariable String matricula){
+        return dentistaService.findByMatricula(matricula);
+    }
+
     @PostMapping()
     @ResponseBody
     public ResponseEntity<DentistaDto> saveDentista(@RequestBody Dentista dentista){
@@ -41,8 +46,8 @@ public class DentistaController {
         return dentistaService.updateDentistaById(dentista);
     }
 
-    @DeleteMapping("{matricula}")
-    public ResponseEntity<String> deleteDentista(@PathVariable String matricula){
-        return dentistaService.deleteDentista(matricula);
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteDentista(@PathVariable Long id){
+        return dentistaService.deleteDentista(id);
     }
 }

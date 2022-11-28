@@ -15,12 +15,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/dentistas/3",
+							"raw": "{{host}}/dentistas/id/3",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"dentistas",
+								"id",
 								"3"
 							]
 						}
@@ -28,7 +29,25 @@
 					"response": []
 				},
 				{
-					"name": "Listar Todos",
+					"name": "Dentista - Listar por Matricula",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/dentistas/0000003",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"dentistas",
+								"0000003"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Dentista - Listar Todos",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -45,7 +64,7 @@
 					"response": []
 				},
 				{
-					"name": "Novo",
+					"name": "Dentista - Novo",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -71,7 +90,7 @@
 					"response": []
 				},
 				{
-					"name": "Deletar",
+					"name": "Dentista - Deletar",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -89,7 +108,7 @@
 					"response": []
 				},
 				{
-					"name": "Atualizar",
+					"name": "Dentista - Atualizar",
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -137,13 +156,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/pacientes/2",
+							"raw": "{{host}}/pacientes/id/1",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"pacientes",
-								"2"
+								"id",
+								"1"
 							]
 						}
 					},
@@ -167,13 +187,31 @@
 					"response": []
 				},
 				{
+					"name": "PACIENTE - Listar por RG",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/pacientes/383959408",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"pacientes",
+								"383959408"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "PACIENTE - Novo",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": " {\r\n    \"nome\": \"Larissa\",\r\n    \"sobrenome\": \"Natália Rodrigues\",\r\n    \"rg\": \"25.166.036-9\",\r\n    \"dataCadastro\": \"2022-11-16\",\r\n    \"endereco\": {\r\n        \"cep\": \"05546-030\",\r\n        \"logradouro\": \"Praça Professor Vasco de Andrade\",\r\n        \"numero\": \"427\",\r\n        \"bairro\": \"Jardim Cláudia\",\r\n        \"localidade\": \"São Paulo\",\r\n        \"uf\": \"SP\"\r\n    }\r\n}",
+							"raw": " {\r\n    \"nome\": \"Larissa\",\r\n    \"sobrenome\": \"Natália Rodrigues\",\r\n    \"rg\": \"251660369\",\r\n    \"endereco\": {\r\n        \"cep\": \"05546-030\",\r\n        \"logradouro\": \"Praça Professor Vasco de Andrade\",\r\n        \"numero\": \"427\",\r\n        \"bairro\": \"Jardim Cláudia\",\r\n        \"localidade\": \"São Paulo\",\r\n        \"uf\": \"SP\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -198,13 +236,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/pacientes/2",
+							"raw": "{{host}}/pacientes/4",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"pacientes",
-								"2"
+								"4"
 							]
 						}
 					},
@@ -217,7 +255,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 2,\r\n    \"nome\": \"Calebe\",\r\n    \"sobrenome\": \"Samuel Luan Almada\",\r\n    \"rg\": \"25.271.333-3\",\r\n    \"dataCadastro\": \"2020-04-01\",\r\n    \"endereco\": {\r\n        \"cep\": \"05546-030\",\r\n        \"logradouro\": \"Praça Professor Vasco de Andrade\",\r\n        \"numero\": \"427\",\r\n        \"bairro\": \"Jardim Cláudia\",\r\n        \"localidade\": \"São Paulo\",\r\n        \"uf\": \"SP\"\r\n    }\r\n}\r\n",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"nome\": \"Luiz\",\r\n    \"sobrenome\": \"Samuel Luan Almada\",\r\n    \"rg\": \"252713338\",\r\n    \"dataCadastro\": \"2020-04-01\",\r\n    \"endereco\": {\r\n        \"cep\": \"05546-030\",\r\n        \"logradouro\": \"Praça Professor Vasco de Andrade\",\r\n        \"numero\": \"427\",\r\n        \"bairro\": \"Jardim Cláudia\",\r\n        \"localidade\": \"São Paulo\",\r\n        \"uf\": \"SP\"\r\n    }\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -231,6 +269,135 @@
 							],
 							"path": [
 								"pacientes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Consultas",
+			"item": [
+				{
+					"name": "CONSULTA - Listar todas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/consultas",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"consultas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CONSULTA - Listar por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/consultas/id/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"consultas",
+								"id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CONSULTA - Listar por rg",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/consultas/383959408",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"consultas",
+								"383959408"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CONSULTA - Novo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dhConsulta\": \"2022-12-29T11:00:00\",\r\n    \"rgPaciente\": \"383959408\",\r\n    \"matriculaDentista\": \"0000002\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/consultas",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"consultas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CONSULTA - Atualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"rgPaciente\": \"383959408\",\r\n    \"matriculaDentista\": \"0000001\",\r\n    \"dhConsulta\": \"2022-12-30T14:30:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/consultas",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"consultas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CONSULTA - Deletar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/consultas/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"consultas",
+								"1"
 							]
 						}
 					},
