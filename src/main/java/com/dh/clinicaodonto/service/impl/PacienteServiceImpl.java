@@ -38,11 +38,11 @@ public class PacienteServiceImpl implements PacienteService {
    }
 
    @Override
-   public ResponseEntity<PacienteDto> findPacienteById(Long id) {
+   public ResponseEntity<PacienteDto> findPacienteByRG(String rg) {
       log.info("[PacienteService] [findPacienteById]");
       mapper.registerModule(new JavaTimeModule());
       try{
-         return ResponseEntity.status(HttpStatus.OK).body(mapper.convertValue(pacienteRepository.findById(id).get(),PacienteDto.class));
+         return ResponseEntity.status(HttpStatus.OK).body(mapper.convertValue(pacienteRepository.findByRg(rg),PacienteDto.class));
       }catch (Exception e){
          log.error("[PacienteService] [findPacienteById] Paciente não localizado");
          return new ResponseEntity("Paciente não foi localizado",HttpStatus.BAD_REQUEST);
@@ -66,7 +66,7 @@ public class PacienteServiceImpl implements PacienteService {
    public ResponseEntity <PacienteDto> updatePacienteById(Paciente paciente) {
       log.info("[PacienteService] [updatePacienteById]");
       try{
-            PacienteDto pacienteDto = findPacienteById(paciente.getId()).getBody();
+            PacienteDto pacienteDto = findPacienteByRG(paciente.getRg()).getBody();
             mapper.registerModule(new JavaTimeModule());
             return ResponseEntity.status(HttpStatus.OK).body(mapper.convertValue(pacienteRepository.save(paciente), PacienteDto.class));
       }catch (Exception e){

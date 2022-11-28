@@ -6,21 +6,13 @@ import com.dh.clinicaodonto.service.impl.PacienteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("pacientes")
+@CrossOrigin
 public class PacienteController {
 
    @Autowired
@@ -31,9 +23,9 @@ public class PacienteController {
       return pacienteService.findAllPacientes();
    }
 
-   @GetMapping("{id}")
-   public ResponseEntity<PacienteDto> findPacienteById(@PathVariable Long id){
-      return pacienteService.findPacienteById(id);
+   @GetMapping("{rg}")
+   public ResponseEntity<PacienteDto> findPacienteByRG(@PathVariable String rg){
+      return pacienteService.findPacienteByRG(rg);
    }
    @PostMapping()
    @ResponseBody

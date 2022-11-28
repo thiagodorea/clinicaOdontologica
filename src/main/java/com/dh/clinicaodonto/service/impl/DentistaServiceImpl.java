@@ -42,11 +42,11 @@ public class DentistaServiceImpl implements DentistaService {
     }
 
     @Override
-    public ResponseEntity<DentistaDto> findDentistaById(Long id) {
+    public ResponseEntity<DentistaDto> findDentistaByMatricula(String matricula) {
         log.info("[DentistaService] [findDentistaById]");
         mapper.registerModule(new JavaTimeModule());
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(mapper.convertValue(dentistaRepository.findById(id).get(), DentistaDto.class));
+            return ResponseEntity.status(HttpStatus.OK).body(mapper.convertValue(dentistaRepository.findByMatricula(matricula), DentistaDto.class));
         } catch (Exception e) {
             return new ResponseEntity("não foi localizado o dentista",HttpStatus.BAD_REQUEST);
         }
@@ -71,7 +71,7 @@ public class DentistaServiceImpl implements DentistaService {
     public ResponseEntity<DentistaDto> updateDentistaById(Dentista dentista) {
         log.info("[DentistaService] [updateDentistaById]");
         try{
-            DentistaDto dentistaDto = findDentistaById(dentista.getId()).getBody();
+            DentistaDto dentistaDto = findDentistaByMatricula(dentista.getMatricula()).getBody();
             mapper.registerModule(new JavaTimeModule());
             return ResponseEntity.status(HttpStatus.OK).body(mapper.convertValue(dentistaRepository.save(dentista), DentistaDto.class));
         }catch (Exception e){
@@ -81,10 +81,11 @@ public class DentistaServiceImpl implements DentistaService {
     }
 
     @Override
-    public ResponseEntity<String> deleteDentista(long id) {
+    public ResponseEntity<String> deleteDentista(String matricula) {
         log.info("[DentistaService] [deleteDentista]");
         try {
-            dentistaRepository.deleteById(id);
+            Dentista dentista = dentistaRepository.findByMatricula(matricula);
+            dentistaRepository.deleteById(dentista.getId());
             return ResponseEntity.status(HttpStatus.OK).body("Dentista excluido com sucesso.");
         }catch (Exception e){
             log.error("[DentistaService] [deleteDentista] Erro ao excluir Dentista", e);

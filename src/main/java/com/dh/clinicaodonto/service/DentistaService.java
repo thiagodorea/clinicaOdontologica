@@ -11,11 +11,11 @@ public interface DentistaService {
 
     List<DentistaDto> findAllDenstistas();
 
-    ResponseEntity<DentistaDto> findDentistaById(Long id);
+    ResponseEntity<DentistaDto> findDentistaByMatricula(String matricula);
 
     ResponseEntity<DentistaDto> saveDentista(Dentista dentista);
 
     ResponseEntity<DentistaDto> updateDentistaById(Dentista dentista);
 
-    ResponseEntity<String> deleteDentista(long id);
+    ResponseEntity<String> deleteDentista(String matricula);
 }
