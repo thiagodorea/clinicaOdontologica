@@ -1,7 +1,9 @@
 package com.dh.clinicaodonto.service.impl;
 
+import com.dh.clinicaodonto.domain.Consulta;
 import com.dh.clinicaodonto.domain.Paciente;
 import com.dh.clinicaodonto.dto.PacienteDto;
+import com.dh.clinicaodonto.repository.ConsultaRepository;
 import com.dh.clinicaodonto.repository.PacienteRepository;
 import com.dh.clinicaodonto.service.PacienteService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Log4j2
 @Service
@@ -23,6 +26,9 @@ public class PacienteServiceImpl implements PacienteService {
 
    @Autowired
    private PacienteRepository pacienteRepository;
+
+   @Autowired
+   private ConsultaRepository consultaRepository;
 
    ObjectMapper mapper = new ObjectMapper();
 
@@ -96,8 +102,13 @@ public class PacienteServiceImpl implements PacienteService {
       public ResponseEntity<String> deletePaciente(Long id) {
       log.info("[PacienteService] [deletePaciente]");
       try {
-         pacienteRepository.deleteById(id);
-         return ResponseEntity.status(HttpStatus.OK).body("Paciente " + id +" excluido com sucesso.");
+         Optional<Paciente> paciente =  pacienteRepository.findById(id);
+         List<Consulta> consultas = consultaRepository.findByPacienteRg(paciente.get().getRg());
+         if(consultas.isEmpty()) {
+            pacienteRepository.deleteById(id);
+            return ResponseEntity.status(HttpStatus.OK).body("Paciente " + id +" excluido com sucesso.");
+         }
+         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Existem consultas registradas neste paciente");
       }catch (Exception e){
          log.error("[PacienteService] [deletePaciente] Não foi possível excluir Paciente", e);
          return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Não foi possível  excluir o paciente: " + id);

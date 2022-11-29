@@ -100,7 +100,7 @@ public class DentistaServiceImpl implements DentistaService {
                 dentistaRepository.deleteById(id);
                 return ResponseEntity.status(HttpStatus.OK).body("Dentista excluido com sucesso.");
             }
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Existem Consultas cadastradas nesete Dentista");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Existem Consultas cadastradas neste Dentista");
         }catch (Exception e){
             log.error("[DentistaService] [deleteDentista] Erro ao excluir Dentista", e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao excluir o Dentista" );
