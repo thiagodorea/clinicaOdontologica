@@ -64,25 +64,27 @@ public class PacienteServiceImpl implements PacienteService {
 
    @Override
    @Transactional
-   public ResponseEntity<PacienteDto> savePaciente(Paciente paciente) {
+   public ResponseEntity<PacienteDto> savePaciente(PacienteDto pacienteDto) {
       log.info("[PacienteService] [savePaciente]");
       try{
          mapper.registerModule(new JavaTimeModule());
-         paciente.setDataCadastro(LocalDate.now());
+         pacienteDto.setDataCadastro(LocalDate.now());
+         Paciente paciente = mapper.convertValue(pacienteDto,Paciente.class);
          return ResponseEntity.status(HttpStatus.CREATED).body(mapper.convertValue(pacienteRepository.save(paciente),PacienteDto.class));
       }catch (Exception e){
          log.error("[PacienteService] [savePaciente] Não foi possível salvar o paciente");
-         return new ResponseEntity("Não foi possível salvar o paciente "+ paciente.getNome(),HttpStatus.BAD_REQUEST);
+         return new ResponseEntity("Não foi possível salvar o paciente "+ pacienteDto.getNome(),HttpStatus.BAD_REQUEST);
       }
    }
 
    @Override
    @Transactional
-   public ResponseEntity <PacienteDto> updatePacienteById(Paciente paciente) {
+   public ResponseEntity <PacienteDto> updatePacienteById(PacienteDto pacienteDto) {
       log.info("[PacienteService] [updatePacienteById]");
       try{
-            PacienteDto pacienteDto = findPacienteById(paciente.getId()).getBody();
+            PacienteDto pacienteResponse = findPacienteById(pacienteDto.getId()).getBody();
             mapper.registerModule(new JavaTimeModule());
+            Paciente paciente = mapper.convertValue(pacienteDto,Paciente.class);
             return ResponseEntity.status(HttpStatus.OK).body(mapper.convertValue(pacienteRepository.save(paciente), PacienteDto.class));
       }catch (Exception e){
          log.error("[PacienteService] [updatePacienteById] Erro ao atualizar os dados do paciente", e);
