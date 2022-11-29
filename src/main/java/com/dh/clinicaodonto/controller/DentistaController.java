@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("dentistas")
+@CrossOrigin
 public class DentistaController {
 
     @Autowired
