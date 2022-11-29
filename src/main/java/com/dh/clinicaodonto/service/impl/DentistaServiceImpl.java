@@ -1,7 +1,9 @@
 package com.dh.clinicaodonto.service.impl;
 
+import com.dh.clinicaodonto.domain.Consulta;
 import com.dh.clinicaodonto.domain.Dentista;
 import com.dh.clinicaodonto.dto.DentistaDto;
+import com.dh.clinicaodonto.repository.ConsultaRepository;
 import com.dh.clinicaodonto.repository.DentistaRepository;
 import com.dh.clinicaodonto.service.DentistaService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Log4j2
 @Service
@@ -23,6 +26,8 @@ public class DentistaServiceImpl implements DentistaService {
     @Autowired
     private DentistaRepository dentistaRepository;
 
+    @Autowired
+    private ConsultaRepository consultaRepository;
     @Override
     public List<DentistaDto> findAllDenstistas() {
         log.info("[DentistaService] [findAllDentistas]");
@@ -89,8 +94,13 @@ public class DentistaServiceImpl implements DentistaService {
     public ResponseEntity<String> deleteDentista(long id) {
         log.info("[DentistaService] [deleteDentista]");
         try {
-            dentistaRepository.deleteById(id);
-            return ResponseEntity.status(HttpStatus.OK).body("Dentista excluido com sucesso.");
+            Optional<Dentista> dentista = dentistaRepository.findById(id);
+            List<Consulta> consulta = consultaRepository.findByDentistaMatricula(dentista.get().getMatricula());
+            if(consulta.isEmpty()) {
+                dentistaRepository.deleteById(id);
+                return ResponseEntity.status(HttpStatus.OK).body("Dentista excluido com sucesso.");
+            }
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Existem Consultas cadastradas nesete Dentista");
         }catch (Exception e){
             log.error("[DentistaService] [deleteDentista] Erro ao excluir Dentista", e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao excluir o Dentista" );

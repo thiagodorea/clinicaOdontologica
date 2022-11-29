@@ -1,5 +1,6 @@
 package com.dh.clinicaodonto.controller;
 
+import com.dh.clinicaodonto.domain.Consulta;
 import com.dh.clinicaodonto.dto.ConsultaDto;
 import com.dh.clinicaodonto.dto.ConsultaMarcacaoDto;
 import com.dh.clinicaodonto.service.impl.ConsultaServiceImpl;
@@ -30,6 +31,11 @@ public class ConsultaController {
    @GetMapping("{rg}")
    public ResponseEntity<List<ConsultaDto>> findConsultaByRg(@PathVariable String rg){
       return consultaService.findConsultaByRg(rg);
+   }
+
+   @GetMapping("matricula/{matricula}")
+   public ResponseEntity<List<Consulta>> findConsultaByMatricula(@PathVariable String matricula){
+      return consultaService.findConsultaByMatricula(matricula);
    }
 
    @PostMapping()

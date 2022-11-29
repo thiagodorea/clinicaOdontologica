@@ -75,6 +75,22 @@ public class ConsultaServiceImpl implements ConsultaService {
    }
 
    @Override
+   public ResponseEntity<List<Consulta>>findConsultaByMatricula(String matricula) {
+      log.info("[ConsultaService] [findConsultaByRg]");
+      mapper.registerModule(new JavaTimeModule());
+      try{
+         List<Consulta> consultas = consultaRepository.findByDentistaMatricula(matricula);
+         List<ConsultaDto> consultasDto = new ArrayList<>();
+         for(Consulta consulta : consultas){
+            consultasDto.add(mapper.convertValue(consulta,ConsultaDto.class));
+         }
+         return ResponseEntity.status(HttpStatus.OK).body(consultas);
+      }catch (Exception e){
+         return new ResponseEntity("Consulta não localizada",HttpStatus.BAD_REQUEST);
+      }
+   }
+
+   @Override
    public ResponseEntity<ConsultaDto> saveConsulta(ConsultaMarcacaoDto consultaMarcacao) {
       log.info("[ConsultaService] [saveConsulta]");
       PacienteDto pacienteDto = new PacienteDto();

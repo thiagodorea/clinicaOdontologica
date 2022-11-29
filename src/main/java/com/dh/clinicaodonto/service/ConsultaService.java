@@ -1,5 +1,6 @@
 package com.dh.clinicaodonto.service;
 
+import com.dh.clinicaodonto.domain.Consulta;
 import com.dh.clinicaodonto.dto.ConsultaDto;
 import com.dh.clinicaodonto.dto.ConsultaMarcacaoDto;
 import org.springframework.http.ResponseEntity;
@@ -16,5 +17,7 @@ public interface ConsultaService {
    ResponseEntity<ConsultaDto> saveConsulta(ConsultaMarcacaoDto consultaMarcacaoDto);
    ResponseEntity<ConsultaDto> updateConsultaByRg(ConsultaMarcacaoDto consultaMarcacaoDto);
    ResponseEntity<String> deleteConsulta(Long id);
+
+   ResponseEntity<List<Consulta>> findConsultaByMatricula(String matricula);
 
 }
