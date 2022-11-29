@@ -30,7 +30,7 @@ public class Consulta {
    @OneToOne
    @JoinColumn(name = "paciente_id")
    private Paciente paciente;
-   @ManyToOne
+   @OneToOne
    @JoinColumn(name = "dentista_id")
    private Dentista dentista;
    private LocalDateTime dhConsulta;
