@@ -18,8 +18,8 @@ public class UsuarioController {
     private UsuarioServiceImpl usuarioService;
 
     @PostMapping("login")
-    public ResponseEntity<UsuarioDto> login(String username, String password) {
-        return usuarioService.login(username,password);
+    public ResponseEntity<UsuarioDto> login(@RequestBody UsuarioDto usuario) {
+        return usuarioService.login(usuario);
     }
 
     @PostMapping("criar")

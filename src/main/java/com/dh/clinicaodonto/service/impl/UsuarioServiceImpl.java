@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 
 @Log4j2
 @Service
@@ -22,10 +24,24 @@ public class UsuarioServiceImpl implements UsuarioService {
     ObjectMapper mapper = new ObjectMapper();
 
     @Override
-    public ResponseEntity<UsuarioDto> login(String username, String password) {
+    public ResponseEntity login(UsuarioDto usuario) {
         mapper.registerModule(new JavaTimeModule());
         log.info("[UsuarioService] [loginUsuario]");
-        return  ResponseEntity.status(HttpStatus.OK).body(mapper.convertValue(repository.findByUsername(username),UsuarioDto.class));
+
+        try {
+            Optional<Usuario> user = repository.findByUsername(usuario.getUsername());
+            if(user.isEmpty()) {
+                return new ResponseEntity<>("usuario ou senha inválido", HttpStatus.BAD_REQUEST);
+            }
+            if(!usuario.getPassword().equals(user.get().getPassword()) ) {
+                return new ResponseEntity<>("usuario ou senha inválido", HttpStatus.BAD_REQUEST);
+            }
+//
+                return new ResponseEntity("TOKEN", HttpStatus.OK);
+        } catch (Exception err) {
+            return  new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
+        }
+
     }
 
     @Override
@@ -41,8 +57,5 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     }
 
-    @Override
-    public void resetPassword() {
 
-    }
 }
