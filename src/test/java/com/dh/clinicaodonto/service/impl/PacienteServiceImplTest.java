@@ -31,12 +31,6 @@ class PacienteServiceImplTest {
    }
 
    @Test
-   void findPacienteById() {
-      PacienteDto paciente = service.findPacienteById(1L).getBody();
-      assertEquals("Elza",paciente.getNome());
-   }
-
-   @Test
    void findByRg() {
       PacienteDto paciente = service.findByRg("383959408").getBody();
       assertEquals("Elza",paciente.getNome());
@@ -59,11 +53,11 @@ class PacienteServiceImplTest {
       EnderecoDto endereco1 = new EnderecoDto("05546-030","Praça Professor Vasco de Andrade","427","Jardim Cláudia","São Paulo","SP");
       PacienteDto paciente1 = new PacienteDto("Calebe","Samuel Luan Almada","252713333", LocalDate.now(),endereco1);
 
-      assertEquals(200,service.updatePacienteById(paciente1).getStatusCode().value());
+      assertEquals(200,service.updatePacienteByRg(paciente1).getStatusCode().value());
 
       EnderecoDto endereco2 = new EnderecoDto("05546-030","Praça Professor Vasco de Andrade","427","Jardim Cláudia","São Paulo","SP");
       PacienteDto paciente2 = new PacienteDto( "Timbó","Samuel Luan Almada","252713335", LocalDate.now(),endereco2);
-      assertEquals(400,service.updatePacienteById(paciente2).getStatusCode().value());
+      assertEquals(400,service.updatePacienteByRg(paciente2).getStatusCode().value());
    }
 
    @Test

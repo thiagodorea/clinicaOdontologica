@@ -31,11 +31,6 @@ public class PacienteController {
       return pacienteService.findAllPacientes();
    }
 
-   @GetMapping("id/{id}")
-   public ResponseEntity<PacienteDto> findPacienteById(@PathVariable Long id){
-      return pacienteService.findPacienteById(id);
-   }
-
    @GetMapping("{rg}")
    public ResponseEntity<PacienteDto> findByRg(@PathVariable String rg){
       return pacienteService.findByRg(rg);
@@ -49,8 +44,8 @@ public class PacienteController {
 
    @PutMapping()
    @ResponseBody
-   public ResponseEntity<PacienteDto> updatePacienteById(@RequestBody PacienteDto pacienteDto){
-      return pacienteService.updatePacienteById(pacienteDto);
+   public ResponseEntity<PacienteDto> updatePacienteByRg(@RequestBody PacienteDto pacienteDto){
+      return pacienteService.updatePacienteByRg(pacienteDto);
    }
 
    @DeleteMapping("{rg}")
