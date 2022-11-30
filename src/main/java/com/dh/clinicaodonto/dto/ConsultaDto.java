@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 @Builder
@@ -18,7 +19,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ConsultaDto {
+   @NotBlank
    private LocalDateTime dhConsulta;
+   @NotBlank
    private PacienteConsultaDto paciente;
+   @NotBlank
    private DentistaConsultaDto dentista;
 }

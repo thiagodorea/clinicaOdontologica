@@ -22,4 +22,7 @@ public class PacienteDto {
     private String rg;
     private LocalDate dataCadastro;
     private EnderecoDto endereco;
+    public String getNomeSobrenome() {
+        return this.nome+ " " +this.sobrenome;
+    }
 }
