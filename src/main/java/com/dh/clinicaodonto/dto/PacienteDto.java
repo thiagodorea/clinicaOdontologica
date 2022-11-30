@@ -17,7 +17,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PacienteDto {
-    private Long id;
     private String nome;
     private String sobrenome;
     private String rg;

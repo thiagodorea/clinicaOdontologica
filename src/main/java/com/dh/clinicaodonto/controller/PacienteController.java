@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -30,14 +31,11 @@ public class PacienteController {
       return pacienteService.findAllPacientes();
    }
 
-   @GetMapping("id/{id}")
-   public ResponseEntity<PacienteDto> findPacienteById(@PathVariable Long id){
-      return pacienteService.findPacienteById(id);
-   }
    @GetMapping("{rg}")
    public ResponseEntity<PacienteDto> findByRg(@PathVariable String rg){
       return pacienteService.findByRg(rg);
    }
+
    @PostMapping()
    @ResponseBody
    public ResponseEntity<PacienteDto> savePaciente(@RequestBody PacienteDto pacienteDto){
@@ -46,13 +44,13 @@ public class PacienteController {
 
    @PutMapping()
    @ResponseBody
-   public ResponseEntity<PacienteDto> updatePacienteById(@RequestBody PacienteDto pacienteDto){
-      return pacienteService.updatePacienteById(pacienteDto);
+   public ResponseEntity<PacienteDto> updatePacienteByRg(@RequestBody PacienteDto pacienteDto){
+      return pacienteService.updatePacienteByRg(pacienteDto);
    }
 
-   @DeleteMapping("{id}")
-   public ResponseEntity<String> deletePaciente(@PathVariable Long id){
-      return pacienteService.deletePaciente(id);
+   @DeleteMapping("{rg}")
+   public ResponseEntity<String> deletePaciente(@PathVariable String rg){
+      return pacienteService.deletePaciente(rg);
    }
 
 }
