@@ -68,7 +68,7 @@ class PacienteServiceImplTest {
 
    @Test
    void deletePaciente() {
-      assertEquals(200,service.deletePaciente(4l).getStatusCode().value());
-      assertEquals(400,service.deletePaciente(0l).getStatusCode().value());
+      assertEquals(200,service.deletePaciente("419234664").getStatusCode().value());
+      assertEquals(400,service.deletePaciente("383959408").getStatusCode().value());
    }
 }

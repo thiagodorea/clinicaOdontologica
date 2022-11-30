@@ -28,8 +28,8 @@ public class ConsultaServiceImpl implements ConsultaService {
 
    @Autowired
    ConsultaRepository consultaRepository;
-   @Autowired
-   PacienteServiceImpl pacienteService;
+//   @Autowired
+//   PacienteServiceImpl pacienteService;
    @Autowired
    DentistaServiceImpl dentistaService;
 
@@ -96,7 +96,7 @@ public class ConsultaServiceImpl implements ConsultaService {
       PacienteDto pacienteDto = new PacienteDto();
       DentistaDto dentistaDto = new DentistaDto();
       try{
-         pacienteDto = pacienteService.findByRg(consultaMarcacao.getRgPaciente()).getBody();
+//         pacienteDto = pacienteService.findByRg(consultaMarcacao.getRgPaciente()).getBody();
          dentistaDto = dentistaService.findByMatricula(consultaMarcacao.getMatriculaDentista()).getBody();
          mapper.registerModule(new JavaTimeModule());
          Consulta consulta = new Consulta();
@@ -123,7 +123,7 @@ public class ConsultaServiceImpl implements ConsultaService {
       try{
          mapper.registerModule(new JavaTimeModule());
          ConsultaDto consultaDto = findConsultaById(consultaMarcacao.getId()).getBody();
-         pacienteDto = pacienteService.findByRg(consultaMarcacao.getRgPaciente()).getBody();
+//         pacienteDto = pacienteService.findByRg(consultaMarcacao.getRgPaciente()).getBody();
          dentistaDto = dentistaService.findByMatricula(consultaMarcacao.getMatriculaDentista()).getBody();
          Consulta consulta = new Consulta();
          consulta.setId(consultaMarcacao.getId());

@@ -14,7 +14,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class EnderecoDto {
-   private Long id;
    private String cep;
    private String logradouro;
    private String numero;

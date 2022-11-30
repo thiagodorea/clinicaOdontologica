@@ -16,6 +16,6 @@ public interface PacienteService {
    ResponseEntity<PacienteDto> findByRg(String rg);
    ResponseEntity<PacienteDto> savePaciente(PacienteDto pacienteDto);
    ResponseEntity<PacienteDto> updatePacienteById(PacienteDto pacienteDto);
-   ResponseEntity<String> deletePaciente(Long id);
+   ResponseEntity<String> deletePaciente(String rg);
 
 }
