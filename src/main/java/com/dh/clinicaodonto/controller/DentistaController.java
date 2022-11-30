@@ -25,11 +25,6 @@ public class DentistaController {
         return dentistaService.findAllDenstistas();
     }
 
-    @GetMapping("id/{id}")
-    public ResponseEntity<DentistaDto> findDentistaById(@PathVariable Long id){
-        return dentistaService.findDentistaById(id);
-    }
-
     @GetMapping("{matricula}")
     public ResponseEntity<DentistaDto> findByMatricula(@PathVariable String matricula){
         return dentistaService.findByMatricula(matricula);
@@ -43,11 +38,11 @@ public class DentistaController {
 
     @PutMapping()
     @ResponseBody
-    public ResponseEntity<DentistaDto> updateDentistaById(@RequestBody Dentista dentista){
+    public ResponseEntity<DentistaDto> updateDentistaByMatricula(@RequestBody Dentista dentista){
         return dentistaService.updateDentistaById(dentista);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("{matricula}")
     public ResponseEntity<String> deleteDentista(@PathVariable Long id){
         return dentistaService.deleteDentista(id);
     }
