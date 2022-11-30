@@ -85,37 +85,37 @@ public class PacienteServiceImpl implements PacienteService {
    @Transactional
    public ResponseEntity <PacienteDto> updatePacienteById(PacienteDto pacienteDto) {
       log.info("[PacienteService] [updatePacienteById]");
-      Optional<Paciente> pacienteResponse = responsePacienteByRg(pacienteDto.getRg());
       try{
+         Paciente pacienteResponse = responsePacienteByRg(pacienteDto.getRg());
          mapper.registerModule(new JavaTimeModule());
          Paciente paciente = mapper.convertValue(pacienteDto,Paciente.class);
-         paciente.setId(pacienteResponse.get().getId());
+         paciente.setId(pacienteResponse.getId());
          return ResponseEntity.status(HttpStatus.OK).body(mapper.convertValue(pacienteRepository.save(paciente), PacienteDto.class));
       }catch (Exception e){
-         log.error("[PacienteService] [updatePacienteById] Erro ao atualizar os dados do paciente: "+pacienteResponse.get().getNome(), e);
-         return new ResponseEntity("Não foi possivel atualizar o(a) Paciente: "+pacienteResponse.get().getNome(),HttpStatus.BAD_REQUEST);
+         log.error("[PacienteService] [updatePacienteById] Erro ao atualizar os dados do paciente: "+pacienteDto.getRg(), e);
+         return new ResponseEntity("Não foi possivel atualizar o(a) Paciente: "+pacienteDto.getRg(),HttpStatus.BAD_REQUEST);
       }
    }
 
    @Override
       public ResponseEntity<String> deletePaciente(String rg) {
       log.info("[PacienteService] [deletePaciente]");
-      Optional<Paciente> paciente =  responsePacienteByRg(rg);
+      Paciente paciente =  responsePacienteByRg(rg);
       try {
-         if(consultaService.findConsultaByRg(paciente.get().getRg()).getBody().size() > 0)
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Existem consultas registradas para: "+ paciente.get().getNome());
+         if(consultaService.findConsultaByRg(paciente.getRg()).getBody().size() > 0)
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Existem consultas registradas para: "+ paciente.getNome());
 
-            pacienteRepository.deleteById(paciente.get().getId());
-            return ResponseEntity.status(HttpStatus.OK).body("Paciente " + paciente.get().getNome() +" excluido com sucesso.");
+            pacienteRepository.deleteById(paciente.getId());
+            return ResponseEntity.status(HttpStatus.OK).body("Paciente " + paciente.getNome() +" excluido com sucesso.");
       }catch (Exception e){
          log.error("[PacienteService] [deletePaciente] Não foi possível excluir o Paciente", e);
          return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("O paciente: "+rg + " não foi localizado.");
       }
    }
 
-   private Optional<Paciente> responsePacienteByRg(String rg){
+   private Paciente responsePacienteByRg(String rg){
       log.info("[PacienteService] [responsePacienteByRg]");
-      return pacienteRepository.findByRg(rg);
+      return pacienteRepository.findByRg(rg).get();
    }
 
 
