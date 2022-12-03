@@ -10,6 +10,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -23,18 +24,18 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Autowired
     private UsuarioRepository repository;
     ObjectMapper mapper = new ObjectMapper();
-
+    BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
     @Override
-    public ResponseEntity login(UsuarioDto usuario) {
+    public ResponseEntity login(UsuarioDto usuariodto) {
         mapper.registerModule(new JavaTimeModule());
         log.info("[UsuarioService] [loginUsuario]");
 
         try {
-            Optional<Usuario> user = repository.findByUsername(usuario.getUsername());
+            Optional<Usuario> user = repository.findByUsername(usuariodto.getUsername());
             if(user.isEmpty()) {
-                return new ResponseEntity<>("usuario ou senha inválido", HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>("usuario não cadastrado no sistema", HttpStatus.BAD_REQUEST);
             }
-            if(!usuario.getPassword().equals(user.get().getPassword()) ) {
+            if(!decodePassword(usuariodto.getPassword(),user.get().getPassword()) ) {
                 return new ResponseEntity<>("usuario ou senha inválido", HttpStatus.BAD_REQUEST);
             }
 //
@@ -54,6 +55,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             Optional alreadyExists = repository.findByUsername(usuario.getUsername());
 
             if (alreadyExists.isEmpty()) {
+                usuario.setPassword(encoderPassaword(usuario.getPassword()));
                 mapper.convertValue(repository.save(usuario), UsuarioDto.class);
                 return ResponseEntity.status(HttpStatus.CREATED).body("Usuário " + usuario.getUsername()+" criado com sucesso");
             }
@@ -65,5 +67,11 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
     }
 
+    public String encoderPassaword(String password) {
+        return bCryptPasswordEncoder.encode(password);
+    }
 
+    public boolean decodePassword(String password, String  encodedPassword) {
+        return bCryptPasswordEncoder.matches(password, encodedPassword);
+    }
 }

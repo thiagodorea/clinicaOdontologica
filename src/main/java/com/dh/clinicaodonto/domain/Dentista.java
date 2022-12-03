@@ -25,10 +25,4 @@ public class Dentista {
     private String matricula;
 
 
-    public void encoderPassaword(){
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        this.usuario.setPassword(bCryptPasswordEncoder.encode(usuario.getPassword()));
-
-    }
-
 }
