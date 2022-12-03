@@ -1,3 +1,4 @@
+INSERT INTO dentista(nome, sobrenome, matricula) VALUES('Pedro','Dom','000000');
 INSERT INTO dentista(nome, sobrenome, matricula) VALUES('Marcela','Mirella Laís da Costa','0000001');
 INSERT INTO dentista(nome, sobrenome, matricula)  VALUES('Alícia','Giovanna da Conceição','0000002');
 INSERT INTO dentista(nome, sobrenome, matricula)  VALUES('Marcela','Mirella Laís da Costa','0000003');

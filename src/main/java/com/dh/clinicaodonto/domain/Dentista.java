@@ -22,11 +22,5 @@ public class Dentista {
     @Column(nullable = false, unique = true)
     private String matricula;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "usuario_id", nullable = false)
-    private Usuario usuario;
-    public void setMatricula(){
-        this.matricula = UUID.randomUUID() .toString();
-    }
 
 }

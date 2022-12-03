@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("usuario")
+@RequestMapping("usuarios")
 @CrossOrigin
 public class UsuarioController {
 
@@ -22,9 +22,10 @@ public class UsuarioController {
         return usuarioService.login(usuario);
     }
 
-    @PostMapping("criar")
+
     @ResponseBody
-    public ResponseEntity<UsuarioDto> criar(@RequestBody Usuario usuario) {
+    @PostMapping
+    public ResponseEntity criar(@RequestBody Usuario usuario) {
         return usuarioService.saveUsuario(usuario);
     }
 

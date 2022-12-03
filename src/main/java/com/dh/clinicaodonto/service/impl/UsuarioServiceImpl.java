@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+
 import java.util.Optional;
 
 
@@ -45,16 +46,23 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public ResponseEntity<UsuarioDto> saveUsuario(Usuario usuario) {
+    public ResponseEntity saveUsuario(Usuario usuario) {
         log.info("[UsuarioService] [saveUsuario]");
+
         try {
             mapper.registerModule(new JavaTimeModule());
-            return ResponseEntity.status(HttpStatus.CREATED).body(mapper.convertValue(repository.save(usuario), UsuarioDto.class));
+            Optional alreadyExists = repository.findByUsername(usuario.getUsername());
+
+            if (alreadyExists.isEmpty()) {
+                mapper.convertValue(repository.save(usuario), UsuarioDto.class);
+                return ResponseEntity.status(HttpStatus.CREATED).body("Usuário " + usuario.getUsername()+" criado com sucesso");
+            }
+            log.error("[UsuarioService] [saveUsuario] " +usuario.getUsername() + " Usuário já cadastrado no sistema");
+            return new ResponseEntity("Usuário já cadastrado no sistema",HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             log.error("[UsuarioService] [saveUsuario] Não foi possível salvar o usuario");
             return new ResponseEntity("Erro ao criar Usuário",HttpStatus.BAD_REQUEST);
         }
-
     }
 
 

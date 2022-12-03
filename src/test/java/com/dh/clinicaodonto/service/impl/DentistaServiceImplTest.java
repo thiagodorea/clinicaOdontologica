@@ -14,7 +14,7 @@ class DentistaServiceImplTest {
     @Autowired
     private DentistaService service;
 
-    DentistaDto dentistaRetorno = new DentistaDto();
+    DentistaDto dentistaRetorno = new DentistaDto("DTeste", "DTeste", "000");
 
     @Test
     void findAllDenstistas() {
@@ -23,27 +23,26 @@ class DentistaServiceImplTest {
 
     @Test
     void findDentistaById() {
-        DentistaDto dentista = service.findDentistaById(1L).getBody();
-        assertEquals("Marcela",dentista.getNome());
+        DentistaDto dentista = service.findByMatricula("000000").getBody();
+        assertEquals("Pedro",dentista.getNome());
     }
 
     @Test
     void saveDentista() {
-        Dentista dentista = new Dentista(1L, "DentistaTest", "Teste", "000");
-        dentistaRetorno = service.saveDentista(dentista).getBody();
-        assertTrue(dentista.getId() > 0);
+        DentistaDto dentista = new DentistaDto( "DentistaTest", "Teste", "000");
+        assertTrue(dentista.getMatricula().equals(dentistaRetorno.getMatricula()));
         assertEquals(dentista.getNome(), "DentistaTest");
     }
 
     @Test
     void updateDentistaById() {
-        Dentista dentista1 = new Dentista( 2L,"Teste","Teste","000");
-        assertEquals(200,service.updateDentistaById(dentista1).getStatusCode().value());
+        DentistaDto dentista1 = new DentistaDto( "TesteD","TesteD","000000");
+        assertEquals(200,service.updateDentistaByMatricula(dentista1).getStatusCode().value());
     }
 
     @Test
     void deleteDentista() {
-        assertEquals(200,service.deleteDentista(4l).getStatusCode().value());
-        assertEquals(400,service.deleteDentista(0l).getStatusCode().value());
+        assertEquals(200,service.deleteDentista("000000").getStatusCode().value());
+        assertEquals(400,service.deleteDentista("000000").getStatusCode().value());
     }
 }

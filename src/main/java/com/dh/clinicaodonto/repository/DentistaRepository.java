@@ -8,6 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface DentistaRepository extends JpaRepository<Dentista, Long> {
-
    Optional<Dentista> findByMatricula(String matricula);
 }

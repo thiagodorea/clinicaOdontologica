@@ -9,7 +9,7 @@ import java.util.Optional;
 //@Service
 public interface UsuarioService {
     ResponseEntity<String> login (UsuarioDto usuario);
-    ResponseEntity<UsuarioDto> saveUsuario(Usuario usuario);
+    ResponseEntity saveUsuario(Usuario usuario);
 
 
 }

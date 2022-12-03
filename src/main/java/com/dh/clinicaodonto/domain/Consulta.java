@@ -34,4 +34,5 @@ public class Consulta {
    @JoinColumn(name = "dentista_id")
    private Dentista dentista;
    private LocalDateTime dhConsulta;
+
 }
