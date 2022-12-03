@@ -1,6 +1,8 @@
 package com.dh.clinicaodonto.domain;
 
 import lombok.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import javax.persistence.*;
 import java.util.UUID;
 
@@ -22,5 +24,11 @@ public class Dentista {
     @Column(nullable = false, unique = true)
     private String matricula;
 
+
+    public void encoderPassaword(){
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        this.usuario.setPassword(bCryptPasswordEncoder.encode(usuario.getPassword()));
+
+    }
 
 }
