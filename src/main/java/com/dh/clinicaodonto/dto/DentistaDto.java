@@ -16,8 +16,11 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DentistaDto {
-    private Long id;
+    @NotBlank
     private String nome;
+    @NotBlank
     private String sobrenome;
+    @NotBlank
     private String matricula;
+
 }

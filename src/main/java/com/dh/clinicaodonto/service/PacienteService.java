@@ -12,10 +12,9 @@ import java.util.Optional;
 public interface PacienteService {
 
    List<PacienteDto> findAllPacientes();
-   ResponseEntity<PacienteDto> findPacienteById(Long id);
    ResponseEntity<PacienteDto> findByRg(String rg);
-   ResponseEntity<PacienteDto> savePaciente(Paciente paciente);
-   ResponseEntity<PacienteDto> updatePacienteById(Paciente paciente);
-   ResponseEntity<String> deletePaciente(Long id);
+   ResponseEntity<PacienteDto> savePaciente(PacienteDto pacienteDto);
+   ResponseEntity<PacienteDto> updatePacienteByRg(PacienteDto pacienteDto);
+   ResponseEntity<String> deletePaciente(String rg);
 
 }

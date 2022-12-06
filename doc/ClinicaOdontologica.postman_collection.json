@@ -139,37 +139,6 @@
 			"name": "Paciente",
 			"item": [
 				{
-					"name": "PACIENTE - Listar por id",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/pacientes/id/1",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"pacientes",
-								"id",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "PACIENTE - Listar todos",
 					"request": {
 						"method": "GET",
@@ -236,13 +205,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/pacientes/4",
+							"raw": "{{host}}/pacientes/383959408",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"pacientes",
-								"4"
+								"383959408"
 							]
 						}
 					},
@@ -255,7 +224,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 1,\r\n    \"nome\": \"Luiz\",\r\n    \"sobrenome\": \"Samuel Luan Almada\",\r\n    \"rg\": \"252713338\",\r\n    \"dataCadastro\": \"2020-04-01\",\r\n    \"endereco\": {\r\n        \"cep\": \"05546-030\",\r\n        \"logradouro\": \"Praça Professor Vasco de Andrade\",\r\n        \"numero\": \"427\",\r\n        \"bairro\": \"Jardim Cláudia\",\r\n        \"localidade\": \"São Paulo\",\r\n        \"uf\": \"SP\"\r\n    }\r\n}\r\n",
+							"raw": "{\r\n    \"nome\": \"Luiz\",\r\n    \"sobrenome\": \"Samuel Luan Almada\",\r\n    \"rg\": \"383959408\",\r\n    \"dataCadastro\": \"2020-04-01\",\r\n    \"endereco\": {\r\n        \"cep\": \"05546-030\",\r\n        \"logradouro\": \"Praça Professor Vasco de Andrade\",\r\n        \"numero\": \"427\",\r\n        \"bairro\": \"Jardim Cláudia\",\r\n        \"localidade\": \"São Paulo\",\r\n        \"uf\": \"SP\"\r\n    }\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -321,13 +290,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/consultas/383959408",
+							"raw": "{{host}}/consultas/277384904",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"consultas",
-								"383959408"
+								"277384904"
 							]
 						}
 					},
@@ -340,7 +309,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"dhConsulta\": \"2022-12-29T11:00:00\",\r\n    \"rgPaciente\": \"383959408\",\r\n    \"matriculaDentista\": \"0000002\"\r\n}",
+							"raw": "{\r\n    \"dhConsulta\": \"2022-12-29T10:30:00\",\r\n    \"rgPaciente\": \"383959408\",\r\n    \"matriculaDentista\": \"0000001\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -366,7 +335,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 1,\r\n    \"rgPaciente\": \"383959408\",\r\n    \"matriculaDentista\": \"0000001\",\r\n    \"dhConsulta\": \"2022-12-30T14:30:00\"\r\n}",
+							"raw": "{\r\n    \"consultaId\": 1,\r\n    \"rgPaciente\": \"383959408\",\r\n    \"matriculaDentista\": \"0000001\",\r\n    \"dhConsulta\": \"2022-12-06T12:30:00\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -390,14 +359,22 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"consultaId\": 1,\r\n    \"rgPaciente\": \"383959408\",\r\n    \"matriculaDentista\": \"0000001\",\r\n    \"dhConsulta\": \"2022-12-03T11:30:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{host}}/consultas/1",
+							"raw": "{{host}}/consultas",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"consultas",
-								"1"
+								"consultas"
 							]
 						}
 					},

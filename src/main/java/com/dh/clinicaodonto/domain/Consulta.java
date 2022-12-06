@@ -27,11 +27,13 @@ public class Consulta {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
+   private int consultaId;
    @OneToOne
    @JoinColumn(name = "paciente_id")
    private Paciente paciente;
-   @ManyToOne
+   @OneToOne
    @JoinColumn(name = "dentista_id")
    private Dentista dentista;
    private LocalDateTime dhConsulta;
+
 }

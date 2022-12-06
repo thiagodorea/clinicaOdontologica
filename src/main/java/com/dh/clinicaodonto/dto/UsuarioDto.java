@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
@@ -12,5 +13,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UsuarioDto {
+    @NotBlank
     private String username;
+    @NotBlank
+    private String password;
 }
