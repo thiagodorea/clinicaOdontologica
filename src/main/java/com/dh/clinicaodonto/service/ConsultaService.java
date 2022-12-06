@@ -12,12 +12,11 @@ import java.util.List;
 public interface ConsultaService {
 
    List<ConsultaDto> findAllConsultas();
-   ResponseEntity<ConsultaDto> findConsultaById(Long id);
+//   ResponseEntity<ConsultaDto> findConsultaById(Long id);
    ResponseEntity<List<ConsultaDto>> findConsultaByRg(String rg);
+   ResponseEntity<List<ConsultaDto>> findConsultaByMatricula(String matricula);
    ResponseEntity<ConsultaDto> saveConsulta(ConsultaMarcacaoDto consultaMarcacaoDto);
    ResponseEntity<ConsultaDto> updateConsultaByRg(ConsultaMarcacaoDto consultaMarcacaoDto);
-   ResponseEntity<String> deleteConsulta(Long id);
-
-   ResponseEntity<List<Consulta>> findConsultaByMatricula(String matricula);
+   ResponseEntity<String> deleteConsulta(ConsultaMarcacaoDto consultaMarcacao);
 
 }

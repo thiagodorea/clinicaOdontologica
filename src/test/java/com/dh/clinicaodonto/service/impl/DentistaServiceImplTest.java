@@ -21,11 +21,11 @@ class DentistaServiceImplTest {
         assertTrue(service.findAllDenstistas().size() > 0);
     }
 
-    @Test
-    void findDentistaById() {
-        DentistaDto dentista = service.findDentistaById(1L).getBody();
-        assertEquals("Marcela",dentista.getNome());
-    }
+//    @Test
+//    void findDentistaById() {
+//        DentistaDto dentista = service.findDentistaById(1L).getBody();
+//        assertEquals("Marcela",dentista.getNome());
+//    }
 
     @Test
     void saveDentista() {

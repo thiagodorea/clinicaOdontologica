@@ -18,7 +18,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ConsultaDto {
+   private int consultaId;
    private LocalDateTime dhConsulta;
    private PacienteConsultaDto paciente;
    private DentistaConsultaDto dentista;
 }
+

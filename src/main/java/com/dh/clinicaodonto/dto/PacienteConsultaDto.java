@@ -15,7 +15,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PacienteConsultaDto {
-   private Long id;
    private String nome;
    private String sobrenome;
    private String rg;
