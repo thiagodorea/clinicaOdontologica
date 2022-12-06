@@ -31,6 +31,11 @@ public class DentistaController {
         return dentistaService.findAllDenstistas();
     }
 
+//    @GetMapping("id/{id}")
+//    public ResponseEntity<DentistaDto> findDentistaById(@PathVariable Long id){
+//        return dentistaService.findDentistaById(id);
+//    }
+
     @GetMapping("{matricula}")
     public ResponseEntity<DentistaDto> findByMatricula(@PathVariable String matricula){
         return dentistaService.findByMatricula(matricula);

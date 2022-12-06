@@ -22,7 +22,5 @@ public class DentistaDto {
     private String sobrenome;
     @NotBlank
     private String matricula;
-    public String getNomeSobrenome() {
-        return this.nome+ " " +this.sobrenome;
-    }
+
 }

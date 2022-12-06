@@ -88,8 +88,8 @@ public class PacienteServiceImpl implements PacienteService {
    @Override
       public ResponseEntity<String> deletePaciente(String rg) {
       log.info("[PacienteService] [deletePaciente]");
-      Paciente paciente =  responsePacienteByRg(rg);
       try {
+         Paciente paciente =  responsePacienteByRg(rg);
          if(consultaService.findConsultaByRg(paciente.getRg()).getBody().size() > 0)
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Existem consultas registradas para: "+ paciente.getNome());
 
@@ -101,7 +101,7 @@ public class PacienteServiceImpl implements PacienteService {
       }
    }
 
-   private Paciente responsePacienteByRg(String rg){
+   public Paciente responsePacienteByRg(String rg){
       log.info("[PacienteService] [responsePacienteByRg]");
       return pacienteRepository.findByRg(rg).get();
    }

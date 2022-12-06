@@ -11,6 +11,7 @@ import java.util.List;
 public interface DentistaService {
 
     List<DentistaDto> findAllDenstistas();
+//    ResponseEntity<DentistaDto> findDentistaById(Long id);
     ResponseEntity<DentistaDto> findByMatricula(String matricula);
     ResponseEntity<DentistaDto> saveDentista(Dentista dentista);
     ResponseEntity<DentistaDto> updateDentistaByMatricula(DentistaDto dentista);

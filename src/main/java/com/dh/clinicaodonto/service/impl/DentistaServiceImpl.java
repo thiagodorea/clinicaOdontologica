@@ -2,6 +2,7 @@ package com.dh.clinicaodonto.service.impl;
 
 import com.dh.clinicaodonto.domain.Consulta;
 import com.dh.clinicaodonto.domain.Dentista;
+import com.dh.clinicaodonto.domain.Paciente;
 import com.dh.clinicaodonto.dto.DentistaDto;
 import com.dh.clinicaodonto.repository.ConsultaRepository;
 import com.dh.clinicaodonto.repository.DentistaRepository;
@@ -39,6 +40,20 @@ public class DentistaServiceImpl implements DentistaService {
         return dentistasDto;
     }
 
+
+//    @Override
+//    public ResponseEntity<DentistaDto> findDentistaById(Long id) {
+//        log.info("[DentistaService] [findDentistaById]");
+//        mapper.registerModule(new JavaTimeModule());
+//        try {
+//            return ResponseEntity.status(HttpStatus.OK).body(mapper.convertValue(dentistaRepository.findById(id).get(), DentistaDto.class));
+//        } catch (Exception e) {
+//            return new ResponseEntity("O Dentista não foi localizado.",HttpStatus.BAD_REQUEST);
+//        }
+//
+//    }
+
+
     @Override
     public ResponseEntity<DentistaDto> findByMatricula(String matricula) {
         log.info("[DentistaService] [findByMatricula]");
@@ -74,6 +89,7 @@ public class DentistaServiceImpl implements DentistaService {
     public ResponseEntity<DentistaDto> updateDentistaByMatricula(DentistaDto dentistadto) {
         log.info("[DentistaService] [updateDentistaById]");
         try{
+//            DentistaDto dentistaDto = findDentistaById(dentista.getId()).getBody();
             mapper.registerModule(new JavaTimeModule());
             Optional<Dentista> dentistaResponse = dentistaRepository.findByMatricula(dentistadto.getMatricula());
             if(dentistaResponse.isEmpty()) {
@@ -112,7 +128,9 @@ public class DentistaServiceImpl implements DentistaService {
         }
     }
 
-    private Dentista responseDentistaByMatricula(String matricula) {
+
+    public Dentista responseDentistaByMatricula(String matricula){
+        log.info("[DentistaService] [responseDentistaByRg]");
         return dentistaRepository.findByMatricula(matricula).get();
     }
 }

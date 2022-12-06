@@ -18,6 +18,5 @@ public class DentistaConsultaDto {
    private String sobrenome;
    private String matricula;
 
-
 }
 

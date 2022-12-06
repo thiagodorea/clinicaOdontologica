@@ -23,10 +23,10 @@ public class ConsultaController {
       return consultaService.findAllConsultas();
    }
 
-   @GetMapping("id/{id}")
-   public ResponseEntity<ConsultaDto> findConsultaById(@PathVariable Long id){
-      return consultaService.findConsultaById(id);
-   }
+//   @GetMapping("id/{id}")
+//   public ResponseEntity<ConsultaDto> findConsultaById(@PathVariable Long id){
+//      return consultaService.findConsultaById(id);
+//   }
 
    @GetMapping("{rg}")
    public ResponseEntity<List<ConsultaDto>> findConsultaByRg(@PathVariable String rg){
@@ -34,7 +34,7 @@ public class ConsultaController {
    }
 
    @GetMapping("matricula/{matricula}")
-   public ResponseEntity<List<Consulta>> findConsultaByMatricula(@PathVariable String matricula){
+   public ResponseEntity<List<ConsultaDto>> findConsultaByMatricula(@PathVariable String matricula){
       return consultaService.findConsultaByMatricula(matricula);
    }
 
@@ -50,9 +50,9 @@ public class ConsultaController {
       return consultaService.updateConsultaByRg(consultaMarcacao);
    }
 
-   @DeleteMapping("{id}")
-   public ResponseEntity<String> deleteConsulta(@PathVariable Long id){
-      return consultaService.deleteConsulta(id);
+   @DeleteMapping()
+   public ResponseEntity<String> deleteConsulta(@RequestBody ConsultaMarcacaoDto consultaMarcacao){
+      return consultaService.deleteConsulta(consultaMarcacao);
    }
 
 }
