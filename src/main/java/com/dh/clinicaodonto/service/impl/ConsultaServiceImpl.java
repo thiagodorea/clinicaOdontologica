@@ -5,10 +5,6 @@ import com.dh.clinicaodonto.domain.Dentista;
 import com.dh.clinicaodonto.domain.Paciente;
 import com.dh.clinicaodonto.dto.ConsultaDto;
 import com.dh.clinicaodonto.dto.ConsultaMarcacaoDto;
-import com.dh.clinicaodonto.dto.DentistaConsultaDto;
-import com.dh.clinicaodonto.dto.DentistaDto;
-import com.dh.clinicaodonto.dto.PacienteConsultaDto;
-import com.dh.clinicaodonto.dto.PacienteDto;
 import com.dh.clinicaodonto.repository.ConsultaRepository;
 import com.dh.clinicaodonto.service.ConsultaService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,9 +19,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static java.util.Objects.isNull;
 
@@ -46,15 +39,22 @@ public class ConsultaServiceImpl implements ConsultaService {
    final String CONSULTARETROATIVA = "ATENÇÃO: Não é possível agendar consulta retroativa.";
 
    @Override
-   public List<ConsultaDto> findAllConsultas() {
+   public ResponseEntity<List<ConsultaDto>> findAllConsultas() {
       log.info("[ConsultaService] [findAllConsultas]");
-      List<Consulta> consultas = consultaRepository.findAll();
-      List<ConsultaDto> consultasDto = new ArrayList<>();
       mapper.registerModule(new JavaTimeModule());
-      for(Consulta consulta: consultas) {
-         consultasDto.add(mapper.convertValue(consulta, ConsultaDto.class));
+      try{
+         List<Consulta> consultas = consultaRepository.findAll();
+         List<ConsultaDto> consultasDto = new ArrayList<>();
+         for(Consulta consulta: consultas) {
+            consultasDto.add(mapper.convertValue(consulta, ConsultaDto.class));
+         }
+         if(consultasDto.isEmpty())
+            return new ResponseEntity("Não localizamos nenhuma consulta no sistema.",HttpStatus.BAD_REQUEST);
+         return ResponseEntity.status(HttpStatus.OK).body(consultasDto);
+      }catch (Exception e){
+         return new ResponseEntity("Erro ao buscar consultas.",HttpStatus.BAD_REQUEST);
       }
-      return consultasDto;
+
    }
 
    @Override

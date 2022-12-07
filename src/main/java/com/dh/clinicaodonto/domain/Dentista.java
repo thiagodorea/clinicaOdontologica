@@ -1,10 +1,16 @@
 package com.dh.clinicaodonto.domain;
 
-import lombok.*;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-import javax.persistence.*;
-import java.util.UUID;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 
 @Getter
@@ -17,11 +23,11 @@ public class Dentista {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 50)
     private String nome;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 250)
     private String sobrenome;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 7)
     private String matricula;
 
 

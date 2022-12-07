@@ -24,7 +24,7 @@ class ConsultaServiceImplTest {
 
    @Test
    void findAllConsultas() {
-      assertTrue(service.findAllConsultas().size() > 0);
+      assertTrue(service.findAllConsultas().getBody().size() > 0);
    }
 
    @Test

@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public interface ConsultaService {
 
-   List<ConsultaDto> findAllConsultas();
+   ResponseEntity<List<ConsultaDto>> findAllConsultas();
 //   ResponseEntity<ConsultaDto> findConsultaById(Long id);
    ResponseEntity<List<ConsultaDto>> findConsultaByRg(String rg);
    ResponseEntity<List<ConsultaDto>> findConsultaByMatricula(String matricula);

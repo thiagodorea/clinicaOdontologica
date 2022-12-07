@@ -4,7 +4,6 @@ import com.dh.clinicaodonto.dto.PacienteDto;
 import com.dh.clinicaodonto.service.impl.PacienteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,14 +19,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("pacientes")
-@CrossOrigin
 public class PacienteController {
 
    @Autowired
    private PacienteServiceImpl pacienteService;
 
    @GetMapping()
-   public List<PacienteDto> findAllPacientes(){
+   public ResponseEntity<List<PacienteDto>> findAllPacientes(){
       return pacienteService.findAllPacientes();
    }
 
@@ -38,14 +36,14 @@ public class PacienteController {
 
    @PostMapping()
    @ResponseBody
-   public ResponseEntity<PacienteDto> savePaciente(@RequestBody PacienteDto pacienteDto){
+   public ResponseEntity<PacienteDto> savePaciente(@RequestBody @Valid PacienteDto pacienteDto){
       System.out.println(pacienteDto);
       return pacienteService.savePaciente(pacienteDto);
    }
 
    @PutMapping()
    @ResponseBody
-   public ResponseEntity<PacienteDto> updatePacienteByRg(@RequestBody PacienteDto pacienteDto){
+   public ResponseEntity<PacienteDto> updatePacienteByRg(@RequestBody @Valid PacienteDto pacienteDto){
       return pacienteService.updatePacienteByRg(pacienteDto);
    }
 

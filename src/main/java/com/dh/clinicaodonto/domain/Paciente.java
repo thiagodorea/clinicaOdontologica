@@ -29,10 +29,13 @@ public class Paciente {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
+   @Column(nullable = false, length = 50)
    private String nome;
+   @Column(nullable = false, length = 250)
    private String sobrenome;
    @Column(unique = true, nullable = false,length = 10)
    private String rg;
+   @Column(nullable = false)
    private LocalDate dataCadastro;
    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
    @JoinColumn(name = "endereco_id")
