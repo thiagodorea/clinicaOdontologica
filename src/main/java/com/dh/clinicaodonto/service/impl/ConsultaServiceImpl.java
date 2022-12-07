@@ -39,15 +39,22 @@ public class ConsultaServiceImpl implements ConsultaService {
    final String CONSULTARETROATIVA = "ATENÇÃO: Não é possível agendar consulta retroativa.";
 
    @Override
-   public List<ConsultaDto> findAllConsultas() {
+   public ResponseEntity<List<ConsultaDto>> findAllConsultas() {
       log.info("[ConsultaService] [findAllConsultas]");
-      List<Consulta> consultas = consultaRepository.findAll();
-      List<ConsultaDto> consultasDto = new ArrayList<>();
       mapper.registerModule(new JavaTimeModule());
-      for(Consulta consulta: consultas) {
-         consultasDto.add(mapper.convertValue(consulta, ConsultaDto.class));
+      try{
+         List<Consulta> consultas = consultaRepository.findAll();
+         List<ConsultaDto> consultasDto = new ArrayList<>();
+         for(Consulta consulta: consultas) {
+            consultasDto.add(mapper.convertValue(consulta, ConsultaDto.class));
+         }
+         if(consultasDto.isEmpty())
+            return new ResponseEntity("Não localizamos nenhuma consulta no sistema.",HttpStatus.BAD_REQUEST);
+         return ResponseEntity.status(HttpStatus.OK).body(consultasDto);
+      }catch (Exception e){
+         return new ResponseEntity("Erro ao buscar consultas.",HttpStatus.BAD_REQUEST);
       }
-      return consultasDto;
+
    }
 
    @Override

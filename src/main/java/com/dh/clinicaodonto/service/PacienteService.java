@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 public interface PacienteService {
 
-   List<PacienteDto> findAllPacientes();
+   ResponseEntity<List<PacienteDto>> findAllPacientes();
    ResponseEntity<PacienteDto> findByRg(String rg);
    ResponseEntity<PacienteDto> savePaciente(PacienteDto pacienteDto);
    ResponseEntity<PacienteDto> updatePacienteByRg(PacienteDto pacienteDto);

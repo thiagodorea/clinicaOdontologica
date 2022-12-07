@@ -30,15 +30,21 @@ public class PacienteServiceImpl implements PacienteService {
    ObjectMapper mapper = new ObjectMapper();
 
    @Override
-   public List<PacienteDto> findAllPacientes() {
+   public ResponseEntity<List<PacienteDto>> findAllPacientes() {
       log.info("[PacienteService] [findAllPacientes]");
-      List<Paciente> pacientes = pacienteRepository.findAll();
-      List<PacienteDto> pacientesDto = new ArrayList<>();
       mapper.registerModule(new JavaTimeModule());
-      for(Paciente paciente : pacientes) {
-         pacientesDto.add(mapper.convertValue(paciente, PacienteDto.class));
+      try{
+         List<Paciente> pacientes = pacienteRepository.findAll();
+         List<PacienteDto> pacientesDto = new ArrayList<>();
+         for(Paciente paciente : pacientes) {
+            pacientesDto.add(mapper.convertValue(paciente, PacienteDto.class));
+         }
+         if(pacientesDto.isEmpty())
+            return new ResponseEntity("Não localizamos nenhum paciente no sistema.",HttpStatus.BAD_REQUEST);
+         return ResponseEntity.status(HttpStatus.OK).body(pacientesDto);
+      }catch (Exception e){
+         return new ResponseEntity("Erro ao buscar pacientes.",HttpStatus.BAD_REQUEST);
       }
-      return pacientesDto;
    }
 
    @Override

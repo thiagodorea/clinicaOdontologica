@@ -26,18 +26,13 @@ public class ConsultaController {
    private ConsultaServiceImpl consultaService;
 
    @GetMapping()
-   public List<ConsultaDto> findAllConsultas(){
+   public ResponseEntity<List<ConsultaDto>> findAllConsultas(){
       return consultaService.findAllConsultas();
    }
 
    @GetMapping("{rg}")
    public ResponseEntity<List<ConsultaDto>> findConsultaByRg(@PathVariable String rg){
       return consultaService.findConsultaByRg(rg);
-   }
-
-   @GetMapping("matricula/{matricula}")
-   public ResponseEntity<List<ConsultaDto>> findConsultaByMatricula(@PathVariable String matricula){
-      return consultaService.findConsultaByMatricula(matricula);
    }
 
    @PostMapping()

@@ -16,5 +16,5 @@ INSERT INTO consulta(consulta_id,paciente_id, dentista_id, dh_consulta) VALUES(1
 INSERT INTO consulta(consulta_id,paciente_id, dentista_id, dh_consulta) VALUES(1,2,1, '2022-12-29 09:00');
 INSERT INTO consulta(consulta_id,paciente_id, dentista_id, dh_consulta) VALUES(1,3,3, '2022-12-29 10:00');
 
-INSERT INTO usuario(username, password, is_admin) VALUES('Ettore', '1234', false);
-INSERT INTO usuario(username, password, is_admin) VALUES('Pedro', '1234', true);
+--INSERT INTO usuario(username, password, is_admin) VALUES('Ettore', '1234', false);
+--INSERT INTO usuario(username, password, is_admin) VALUES('Pedro', '1234', true);

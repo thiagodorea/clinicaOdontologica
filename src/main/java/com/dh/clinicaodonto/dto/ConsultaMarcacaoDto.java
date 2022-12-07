@@ -8,6 +8,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import java.time.LocalDateTime;
 
 @Getter
@@ -18,7 +20,7 @@ import java.time.LocalDateTime;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ConsultaMarcacaoDto {
    private int consultaId;
-   @NotBlank(message = "Data e Hora é obrigatório.")
+   @NotNull(message = "A Data da consulta é obrigatória.")
    private LocalDateTime dhConsulta;
    @NotBlank(message = "RG do paciente é obrigatório.")
    private String rgPaciente;
