@@ -17,11 +17,11 @@ public class Dentista {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 50)
     private String nome;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 250)
     private String sobrenome;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 7)
     private String matricula;
 
 

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,10 +28,13 @@ public class Consulta {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
+   @Column(nullable = false)
    private int consultaId;
+   @Column(nullable = false)
    @OneToOne
    @JoinColumn(name = "paciente_id")
    private Paciente paciente;
+   @Column(nullable = false)
    @OneToOne
    @JoinColumn(name = "dentista_id")
    private Dentista dentista;

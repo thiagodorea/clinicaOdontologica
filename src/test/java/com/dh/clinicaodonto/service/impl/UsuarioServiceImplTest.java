@@ -1,15 +1,10 @@
 package com.dh.clinicaodonto.service.impl;
 
-import com.dh.clinicaodonto.domain.Usuario;
-import com.dh.clinicaodonto.dto.DentistaDto;
-import com.dh.clinicaodonto.dto.UsuarioDto;
-import com.dh.clinicaodonto.service.DentistaService;
 import com.dh.clinicaodonto.service.UsuarioService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class UsuarioServiceImplTest {
     @Autowired
