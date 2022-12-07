@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -41,18 +42,18 @@ public class ConsultaController {
 
    @PostMapping()
    @ResponseBody
-   public ResponseEntity<ConsultaDto> saveConsulta(@RequestBody ConsultaMarcacaoDto consultaMarcacao){
+   public ResponseEntity<ConsultaDto> saveConsulta(@RequestBody @Valid ConsultaMarcacaoDto consultaMarcacao){
       return consultaService.saveConsulta(consultaMarcacao);
    }
 
    @PutMapping()
    @ResponseBody
-   public ResponseEntity<ConsultaDto> updateConsultaByRg(@RequestBody ConsultaMarcacaoDto consultaMarcacao){
+   public ResponseEntity<ConsultaDto> updateConsultaByRg(@RequestBody @Valid ConsultaMarcacaoDto consultaMarcacao){
       return consultaService.updateConsultaByRg(consultaMarcacao);
    }
 
    @DeleteMapping()
-   public ResponseEntity<String> deleteConsulta(@RequestBody ConsultaMarcacaoDto consultaMarcacao){
+   public ResponseEntity<String> deleteConsulta(@RequestBody @Valid ConsultaMarcacaoDto consultaMarcacao){
       return consultaService.deleteConsulta(consultaMarcacao);
    }
 
