@@ -27,7 +27,7 @@ class PacienteServiceImplTest {
 
    @Test
    void findAllPacientes() {
-      assertTrue(service.findAllPacientes().size() > 0);
+      assertTrue(service.findAllPacientes().getBody().size() > 0);
    }
 
    @Test
