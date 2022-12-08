@@ -5,6 +5,8 @@ import com.dh.clinicaodonto.domain.Dentista;
 import com.dh.clinicaodonto.domain.Paciente;
 import com.dh.clinicaodonto.dto.ConsultaDto;
 import com.dh.clinicaodonto.dto.ConsultaMarcacaoDto;
+import com.dh.clinicaodonto.exception.InvalidRegistrationException;
+import com.dh.clinicaodonto.exception.ResourceNotFoundException;
 import com.dh.clinicaodonto.repository.ConsultaRepository;
 import com.dh.clinicaodonto.service.ConsultaService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -39,61 +41,38 @@ public class ConsultaServiceImpl implements ConsultaService {
    final String CONSULTARETROATIVA = "ATENÇÃO: Não é possível agendar consulta retroativa.";
 
    @Override
-   public ResponseEntity<List<ConsultaDto>> findAllConsultas() {
+   public ResponseEntity<List<ConsultaDto>> findAllConsultas() throws ResourceNotFoundException {
       log.info("[ConsultaService] [findAllConsultas]");
       mapper.registerModule(new JavaTimeModule());
-      try{
-         List<Consulta> consultas = consultaRepository.findAll();
-         List<ConsultaDto> consultasDto = new ArrayList<>();
-         for(Consulta consulta: consultas) {
-            consultasDto.add(mapper.convertValue(consulta, ConsultaDto.class));
-         }
-         if(consultasDto.isEmpty())
-            return new ResponseEntity("Não localizamos nenhuma consulta no sistema.",HttpStatus.BAD_REQUEST);
-         return ResponseEntity.status(HttpStatus.OK).body(consultasDto);
-      }catch (Exception e){
-         return new ResponseEntity("Erro ao buscar consultas.",HttpStatus.BAD_REQUEST);
+      List<Consulta> consultas = consultaRepository.findAll();
+      List<ConsultaDto> consultasDto = new ArrayList<>();
+      for(Consulta consulta: consultas) {
+         consultasDto.add(mapper.convertValue(consulta, ConsultaDto.class));
       }
-
+      if(consultasDto.isEmpty())
+         throw new ResourceNotFoundException("Não localizamos nenhuma consulta no sistema.");
+      return ResponseEntity.status(HttpStatus.OK).body(consultasDto);
    }
 
    @Override
-   public ResponseEntity<List<ConsultaDto>> findConsultaByRg(String rg) {
+   public ResponseEntity<List<ConsultaDto>> findConsultaByRg(String rg) throws ResourceNotFoundException {
       log.info("[ConsultaService] [findConsultaByRg]");
       mapper.registerModule(new JavaTimeModule());
-      try{
-         List<Consulta> consultas = consultaRepository.findByPacienteRg(rg);
-         List<ConsultaDto> consultasDto = new ArrayList<>();
-         for(Consulta consulta : consultas){
-            consultasDto.add(mapper.convertValue(consulta,ConsultaDto.class));
-         }
-         return ResponseEntity.status(HttpStatus.OK).body(consultasDto);
-      }catch (Exception e){
-         return new ResponseEntity("Não localizamos as consultas do(a) paciente: "+rg,HttpStatus.BAD_REQUEST);
+      List<Consulta> consultas = consultaRepository.findByPacienteRg(rg);
+      List<ConsultaDto> consultasDto = new ArrayList<>();
+      for(Consulta consulta : consultas){
+         consultasDto.add(mapper.convertValue(consulta,ConsultaDto.class));
       }
+      if(consultasDto.isEmpty())
+         throw new ResourceNotFoundException("Não localizamos as consultas do(a) paciente: "+rg);
+      return ResponseEntity.status(HttpStatus.OK).body(consultasDto);
    }
 
    @Override
-   public ResponseEntity<List<ConsultaDto>>findConsultaByMatricula(String matricula) {
-      log.info("[ConsultaService] [findConsultaByMatricula]");
-      mapper.registerModule(new JavaTimeModule());
-      try{
-         List<Consulta> consultas = consultaRepository.findByDentistaMatricula(matricula);
-         List<ConsultaDto> consultasDto = new ArrayList<>();
-         for(Consulta consulta : consultas){
-            consultasDto.add(mapper.convertValue(consulta,ConsultaDto.class));
-         }
-         return ResponseEntity.status(HttpStatus.OK).body(consultasDto);
-      }catch (Exception e){
-         return new ResponseEntity("Não localizamos as consultas do dentista: "+matricula,HttpStatus.BAD_REQUEST);
-      }
-   }
-
-   @Override
-   public ResponseEntity<ConsultaDto> saveConsulta(ConsultaMarcacaoDto consultaMarcacao) {
+   public ResponseEntity<ConsultaDto> saveConsulta(ConsultaMarcacaoDto consultaMarcacao) throws InvalidRegistrationException {
       log.info("[ConsultaService] [saveConsulta]");
       if(LocalDateTime.now().isAfter(consultaMarcacao.getDhConsulta()))
-         return new ResponseEntity(CONSULTARETROATIVA,HttpStatus.BAD_REQUEST);
+         throw new InvalidRegistrationException(CONSULTARETROATIVA);
       Paciente paciente = new Paciente();
       Dentista dentista = new Dentista();
       mapper.registerModule(new JavaTimeModule());
@@ -120,18 +99,18 @@ public class ConsultaServiceImpl implements ConsultaService {
       }catch (Exception e){
          log.error("[ConsultaService] [saveConsulta] Não foi possível agendar a consulta.");
          if(isNull(paciente.getRg()))
-            return new ResponseEntity("Não foi possível agendar a sua consulta.\nSeu cadastro não foi encontrado.",HttpStatus.BAD_REQUEST);
+            throw new InvalidRegistrationException("Não foi possível agendar a sua consulta.\nSeu cadastro não foi encontrado.");
          if(isNull(dentista.getMatricula()))
-            return new ResponseEntity("Não foi possível agendar a sua consulta.\nO dentista informado não foi localizado.",HttpStatus.BAD_REQUEST);
-         return new ResponseEntity("Não foi possível agendar a sua consulta, favor verificar os dados informado.",HttpStatus.BAD_REQUEST);
+            throw  new InvalidRegistrationException("Não foi possível agendar a sua consulta.\nO dentista informado não foi localizado.");
+         throw new InvalidRegistrationException("Não foi possível agendar a sua consulta, favor verificar os dados informado.");
       }
    }
 
    @Override
-   public ResponseEntity<ConsultaDto> updateConsultaByRg(ConsultaMarcacaoDto consultaMarcacao) {
+   public ResponseEntity<ConsultaDto> updateConsultaByRg(ConsultaMarcacaoDto consultaMarcacao) throws InvalidRegistrationException, ResourceNotFoundException {
       log.info("[ConsultaService] [updateConsultaByRg]");
       if(LocalDateTime.now().isAfter(consultaMarcacao.getDhConsulta()))
-         return new ResponseEntity(CONSULTARETROATIVA,HttpStatus.BAD_REQUEST);
+         throw new InvalidRegistrationException(CONSULTARETROATIVA);
       Paciente paciente = new Paciente();
       Dentista dentista = new Dentista();
       Consulta consultaAtualizada = new Consulta();
@@ -158,23 +137,18 @@ public class ConsultaServiceImpl implements ConsultaService {
          return ResponseEntity.status(HttpStatus.OK).body(mapper.convertValue(consultaRepository.save(consultaAtualizada),ConsultaDto.class));
       }catch (Exception e){
          log.error("[ConsultaService] [updateConsultaById] Erro ao atualizar a consulta", e);
-         return new ResponseEntity("A consulta do paciente não foi encontrada.",HttpStatus.NOT_FOUND);
+         throw new ResourceNotFoundException("Não localizamos a consulta do(a) paciente: "+consultaMarcacao.getRgPaciente());
       }
    }
 
    @Override
-   public ResponseEntity<String> deleteConsulta(ConsultaMarcacaoDto consultaMarcacao) {
+   public ResponseEntity<String> deleteConsulta(ConsultaMarcacaoDto consultaMarcacao) throws ResourceNotFoundException {
       log.info("[ConsultaService] [deleteConsulta]");
-      try {
-         Consulta consulta = responseConsultaByConsultaIdRg(consultaMarcacao.getConsultaId(),consultaMarcacao.getRgPaciente());
-         if(isNull(consulta))
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Não encontramos consulta do paciente: "+ consultaMarcacao.getRgPaciente());
-         consultaRepository.deleteById(consulta.getId());
-         return ResponseEntity.status(HttpStatus.OK).body("A consulta do(a) paciente " + consulta.getPaciente().getNome()+" "+ consulta.getPaciente().getSobrenome()+", no dia "+ consulta.getDhConsulta()+" foi excluida com sucesso.");
-      }catch (Exception e){
-         log.error("[ConsultaService] [deleteConsulta] Não foi possível excluir a consulta", e);
-         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Não foi possível  excluir a consulta do paciente: " + consultaMarcacao.getRgPaciente());
-      }
+      Consulta consulta = responseConsultaByConsultaIdRg(consultaMarcacao.getConsultaId(),consultaMarcacao.getRgPaciente());
+      if(isNull(consulta))
+         throw  new ResourceNotFoundException("Não encontramos consulta do paciente: "+ consultaMarcacao.getRgPaciente());
+      consultaRepository.deleteById(consulta.getId());
+      return ResponseEntity.status(HttpStatus.OK).body("A consulta do(a) paciente " + consulta.getPaciente().getNome()+" "+ consulta.getPaciente().getSobrenome()+", no dia "+ consulta.getDhConsulta()+" foi excluida com sucesso.");
    }
 
    public Consulta responseConsultaByConsultaIdRg(int consultaId, String rg){

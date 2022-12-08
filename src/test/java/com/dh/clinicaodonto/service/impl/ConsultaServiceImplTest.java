@@ -4,6 +4,8 @@ import com.dh.clinicaodonto.dto.ConsultaDto;
 import com.dh.clinicaodonto.dto.ConsultaMarcacaoDto;
 import com.dh.clinicaodonto.dto.DentistaConsultaDto;
 import com.dh.clinicaodonto.dto.PacienteConsultaDto;
+import com.dh.clinicaodonto.exception.InvalidRegistrationException;
+import com.dh.clinicaodonto.exception.ResourceNotFoundException;
 import com.dh.clinicaodonto.service.ConsultaService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,17 +25,17 @@ class ConsultaServiceImplTest {
    ConsultaDto consultaRetorno = new ConsultaDto();
 
    @Test
-   void findAllConsultas() {
+   void findAllConsultas() throws ResourceNotFoundException {
       assertTrue(service.findAllConsultas().getBody().size() > 0);
    }
 
    @Test
-   void findConsultaByRg() {
+   void findConsultaByRg() throws ResourceNotFoundException {
       assertEquals("Elza",service.findConsultaByRg("383959408").getBody().get(0).getPaciente().getNome());
    }
 
    @Test
-   void saveConsulta() {
+   void saveConsulta() throws InvalidRegistrationException {
       ConsultaMarcacaoDto consultaMarcacaoDto = new ConsultaMarcacaoDto();
       consultaMarcacaoDto.setDhConsulta(LocalDateTime.now().plusHours(1));
       consultaMarcacaoDto.setRgPaciente("252713333");
@@ -43,7 +45,7 @@ class ConsultaServiceImplTest {
    }
 
    @Test
-   void updateConsultaByRg() {
+   void updateConsultaByRg() throws InvalidRegistrationException, ResourceNotFoundException {
       ConsultaMarcacaoDto atualizaConsultaMarcacaoDto = new ConsultaMarcacaoDto(1, LocalDateTime.now().plusHours(1),"383959408","0000001");
       ConsultaDto consultaDtoRetorno = service.updateConsultaByRg(atualizaConsultaMarcacaoDto).getBody();
       assertEquals("Elza",consultaDtoRetorno.getPaciente().getNome());
@@ -51,9 +53,8 @@ class ConsultaServiceImplTest {
    }
 
    @Test
-   void deleteConsulta() {
+   void deleteConsulta() throws ResourceNotFoundException {
       ConsultaMarcacaoDto consultaMarcacaoDto = new ConsultaMarcacaoDto(1, LocalDateTime.now(),"277384904","0000003");
       assertEquals(200,service.deleteConsulta(consultaMarcacaoDto).getStatusCode().value());
-      assertEquals(400,service.deleteConsulta(consultaMarcacaoDto).getStatusCode().value());
    }
 }
