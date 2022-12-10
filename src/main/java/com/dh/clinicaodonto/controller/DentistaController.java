@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,11 +39,11 @@ public class DentistaController {
 
     @PostMapping()
     @ResponseBody
-    public ResponseEntity<DentistaDto> saveDentista(@RequestBody Dentista dentista){
-        return dentistaService.saveDentista(dentista);
+    public ResponseEntity<DentistaDto> saveDentista(@RequestBody DentistaDto dentistaDto){
+        return dentistaService.saveDentista(dentistaDto);
     }
 
-    @PatchMapping()
+    @PutMapping()
     @ResponseBody
     public ResponseEntity<DentistaDto> updateDentista(@RequestBody @Valid DentistaDto dentistadto){
         return dentistaService.updateDentistaByMatricula(dentistadto);

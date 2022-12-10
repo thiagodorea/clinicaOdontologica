@@ -1,6 +1,7 @@
 package com.dh.clinicaodonto.controller;
 
 import com.dh.clinicaodonto.dto.PacienteDto;
+import com.dh.clinicaodonto.exception.ResourceNotFoundException;
 import com.dh.clinicaodonto.service.impl.PacienteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -48,7 +49,7 @@ public class PacienteController {
    }
 
    @DeleteMapping("{rg}")
-   public ResponseEntity<String> deletePaciente(@PathVariable String rg){
+   public ResponseEntity<String> deletePaciente(@PathVariable String rg) throws ResourceNotFoundException {
       return pacienteService.deletePaciente(rg);
    }
 
