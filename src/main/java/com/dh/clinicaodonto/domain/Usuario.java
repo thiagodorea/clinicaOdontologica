@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,9 +29,9 @@ public class Usuario implements UserDetails {
    private Long id;
    @Column(nullable = false, unique = true, length = 20)
    private String username;
-   @Column(nullable = false, length = 50)
+   @Column(nullable = false, length = 90)
    private String password;
-   @ManyToMany(fetch = FetchType.EAGER)
+   @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
    private List<Perfil> perfis;
 
    @Override
