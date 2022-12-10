@@ -22,6 +22,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
    @Autowired
    private Environment env;
 
+   @Autowired
+   AutenticacaoService autenticacaoService;
+
 
 //   Aqui cria a parte das pessissões de acesso
    @Override
@@ -40,9 +43,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //   Aqui cuidamos da parte de autenticação de acesso
    @Override
    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
+      auth.userDetailsService(autenticacaoService);
    }
 
+//   Liberar os cors
    @Bean
    CorsConfigurationSource corsConfigurationSource() {
       CorsConfiguration configuration = new CorsConfiguration().applyPermitDefaultValues();
