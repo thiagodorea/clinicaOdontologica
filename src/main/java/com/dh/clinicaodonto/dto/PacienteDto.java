@@ -1,5 +1,6 @@
 package com.dh.clinicaodonto.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,6 +28,7 @@ public class PacienteDto {
     @NotBlank(message = "RG do paciente é obrigatório.")
     @Size(min=9, max=10, message = "Rg precisa ter 10 caracteres.")
     private String rg;
+    @JsonFormat(pattern = "dd/MM/yyyy", locale = "pt-BR", timezone = "Brazil/East")
     private LocalDate dataCadastro;
     private EnderecoDto endereco;
 
