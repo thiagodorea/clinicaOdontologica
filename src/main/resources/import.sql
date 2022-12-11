@@ -13,14 +13,14 @@ INSERT INTO paciente(nome, sobrenome, rg, data_cadastro,endereco_id) VALUES('Isa
 
 INSERT INTO consulta(consulta_id,paciente_id, dentista_id, dh_consulta) VALUES(1,1,2, '2022-12-29 11:00');
 INSERT INTO consulta(consulta_id,paciente_id, dentista_id, dh_consulta) VALUES(1,2,1, '2022-12-29 09:00');
-INSERT INTO consulta(consulta_id,paciente_id, dentista_id, dh_consulta) VALUES(1,3,3, '2022-12-29 10:00');
+INSERT INTO consulta(consulta_id,paciente_id, dentista_id, dh_consulta) VALUES(1,2,3, '2022-12-29 10:00');
 
---INSERT INTO usuario(username, password) VALUES('Ettore', '$2a$10$yGTh3.fvSrS5hNKLPgo5M.d41uHMQPZj0xG9QkaCFGGUfOEuNH5tS');
---INSERT INTO usuario(username, password) VALUES('Thiago', '$2a$10$yGTh3.fvSrS5hNKLPgo5M.d41uHMQPZj0xG9QkaCFGGUfOEuNH5tS');
---
---INSERT INTO perfil(descricao) VALUES('Administrador');
---INSERT INTO perfil(descricao) VALUES('Usuario');
---
---INSERT INTO  usuario_perfis(usuario_id,perfis_id) VALUES (1,1)
---INSERT INTO  usuario_perfis(usuario_id,perfis_id) VALUES (1,2)
---INSERT INTO  usuario_perfis(usuario_id,perfis_id) VALUES (2,2)
+INSERT INTO usuario(username, password) VALUES('master', '$2a$10$yGTh3.fvSrS5hNKLPgo5M.d41uHMQPZj0xG9QkaCFGGUfOEuNH5tS');
+INSERT INTO usuario(username, password) VALUES('usercomun', '$2a$10$yGTh3.fvSrS5hNKLPgo5M.d41uHMQPZj0xG9QkaCFGGUfOEuNH5tS');
+
+INSERT INTO perfil(descricao) VALUES('Administrador');
+INSERT INTO perfil(descricao) VALUES('Usuario');
+
+INSERT INTO  usuario_perfis(usuario_id,perfis_id) VALUES (1,1)
+INSERT INTO  usuario_perfis(usuario_id,perfis_id) VALUES (1,2)
+INSERT INTO  usuario_perfis(usuario_id,perfis_id) VALUES (2,2)

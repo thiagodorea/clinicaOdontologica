@@ -50,6 +50,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //              permite acesso ao metodo get da rota informada
               .antMatchers("/h2-console/**").permitAll()
               .antMatchers("/auth").permitAll()
+              .antMatchers("/dentistas/**").hasAnyAuthority("Administrador")
+              .antMatchers("/pacientes/**").hasAnyAuthority("Administrador")
 //              bloqueia o acesso a qualquer outra rota não informado a cima
               .anyRequest().authenticated()
               .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
