@@ -47,7 +47,7 @@ class PacienteServiceImplTest {
    }
 
    @Test
-   void updatePacienteById() {
+   void updatePacienteByRg() {
 
 
       EnderecoDto endereco1 = new EnderecoDto("05546-030","Praça Professor Vasco de Andrade","427","Jardim Cláudia","São Paulo","SP");

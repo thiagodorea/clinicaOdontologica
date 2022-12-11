@@ -156,6 +156,16 @@ public class ConsultaServiceImpl implements ConsultaService {
       return consultaRepository.findByConsultaIdAndPacienteRg(consultaId,rg);
    }
 
+   public List<Consulta> existeConsultaByRg(String rg){
+      log.info("[ConsultaService] [existeConsultaByRg]");
+      return consultaRepository.findByPacienteRg(rg);
+   }
+
+   public List<Consulta> existeConsultaByMatricula(String matricula){
+      log.info("[ConsultaService] [existeConsultaByMatricula]");
+      return consultaRepository.findByDentistaMatricula(matricula);
+   }
+
    public List<Consulta> responseConsultaByDentistaAndDhConsulta(String matricula, LocalDateTime dataHoraDaConsultaIni, LocalDateTime dataHoraDaConsultaFim){
       log.info("[ConsultaService] [responseConsultaByDentistaAndDhConsulta]");
       return consultaRepository.findByDentistaMatriculaAndDhConsultaBetween(matricula,dataHoraDaConsultaIni,dataHoraDaConsultaFim);

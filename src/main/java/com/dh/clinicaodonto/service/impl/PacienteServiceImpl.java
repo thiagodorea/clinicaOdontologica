@@ -77,7 +77,7 @@ public class PacienteServiceImpl implements PacienteService {
    @Override
    @Transactional
    public ResponseEntity <PacienteDto> updatePacienteByRg(PacienteDto pacienteDto) {
-      log.info("[PacienteService] [updatePacienteById]");
+      log.info("[PacienteService] [updatePacienteByRg]");
       try{
          Paciente pacienteResponse = responsePacienteByRg(pacienteDto.getRg());
          mapper.registerModule(new JavaTimeModule());
@@ -95,8 +95,8 @@ public class PacienteServiceImpl implements PacienteService {
       log.info("[PacienteService] [deletePaciente]");
       try {
          Paciente paciente =  responsePacienteByRg(rg);
-         if(consultaService.findConsultaByRg(paciente.getRg()).getBody().size() > 0)
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Existem consultas registradas para: "+ paciente.getNome());
+         if(consultaService.existeConsultaByRg(paciente.getRg()).size() > 0)
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Existem consultas registradas para: "+ paciente.getNome() +" "+paciente.getSobrenome());
 
             pacienteRepository.deleteById(paciente.getId());
             return ResponseEntity.status(HttpStatus.OK).body("Paciente " + paciente.getNome() +" excluido com sucesso.");

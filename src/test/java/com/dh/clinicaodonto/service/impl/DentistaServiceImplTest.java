@@ -2,6 +2,7 @@ package com.dh.clinicaodonto.service.impl;
 
 import com.dh.clinicaodonto.domain.Dentista;
 import com.dh.clinicaodonto.dto.DentistaDto;
+import com.dh.clinicaodonto.dto.PacienteDto;
 import com.dh.clinicaodonto.service.DentistaService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,30 +22,32 @@ class DentistaServiceImplTest {
         assertTrue(service.findAllDenstistas().size() > 0);
     }
 
-
-//    @Test
-//    void findDentistaById() {
-//        DentistaDto dentista = service.findDentistaById(1L).getBody();
-//        assertEquals("Marcela",dentista.getNome());
-//    }
-
-
+    @Test
+    void findByMatricula() {
+        DentistaDto dentistaDto = service.findByMatricula("0000003").getBody();
+        assertEquals("Marcela",dentistaDto.getNome());
+    }
     @Test
     void saveDentista() {
-        DentistaDto dentista = new DentistaDto( "DentistaTest", "Teste", "000");
-        assertTrue(dentista.getMatricula().equals(dentistaRetorno.getMatricula()));
-        assertEquals(dentista.getNome(), "DentistaTest");
+        DentistaDto dentistaDto = new DentistaDto( "DentistaTest", "Teste", "000");
+        DentistaDto dentistaSalvo = service.saveDentista(dentistaDto).getBody();
+        assertTrue(dentistaSalvo.getMatricula().equals(dentistaRetorno.getMatricula()));
+        assertEquals(dentistaSalvo.getNome(), "DentistaTest");
     }
 
     @Test
-    void updateDentistaById() {
-        DentistaDto dentista1 = new DentistaDto( "TesteD","TesteD","000000");
-        assertEquals(200,service.updateDentistaByMatricula(dentista1).getStatusCode().value());
+    void updateDentistaByMatricula() {
+        DentistaDto dentista = new DentistaDto( "Marcela","TesteD","0000003");
+        assertEquals(200,service.updateDentistaByMatricula(dentista).getStatusCode().value());
     }
 
     @Test
     void deleteDentista() {
-        assertEquals(200,service.deleteDentista("000000").getStatusCode().value());
-        assertEquals(400,service.deleteDentista("000000").getStatusCode().value());
+        DentistaDto dentistaDto = new DentistaDto( "DentistaTest", "Teste", "000");
+        service.saveDentista(dentistaDto);
+        assertEquals(200,service.deleteDentista("000").getStatusCode().value());
+        assertEquals(400,service.deleteDentista("0000000").getStatusCode().value());
     }
+
+
 }

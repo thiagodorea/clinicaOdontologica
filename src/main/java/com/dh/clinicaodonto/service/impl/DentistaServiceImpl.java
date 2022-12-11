@@ -2,6 +2,7 @@ package com.dh.clinicaodonto.service.impl;
 
 import com.dh.clinicaodonto.domain.Consulta;
 import com.dh.clinicaodonto.domain.Dentista;
+import com.dh.clinicaodonto.domain.Paciente;
 import com.dh.clinicaodonto.dto.DentistaDto;
 import com.dh.clinicaodonto.repository.ConsultaRepository;
 import com.dh.clinicaodonto.repository.DentistaRepository;
@@ -10,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -25,8 +27,11 @@ public class DentistaServiceImpl implements DentistaService {
     ObjectMapper mapper = new ObjectMapper();
     @Autowired
     private DentistaRepository dentistaRepository;
+
+    @Lazy
     @Autowired
-    private ConsultaRepository consultaRepository;
+    private ConsultaServiceImpl consultaService;
+
     @Override
     public List<DentistaDto> findAllDenstistas() {
         log.info("[DentistaService] [findAllDentistas]");
@@ -52,7 +57,7 @@ public class DentistaServiceImpl implements DentistaService {
 
     @Override
     @Transactional
-    public ResponseEntity<DentistaDto> saveDentista(Dentista dentistadto) {
+    public ResponseEntity<DentistaDto> saveDentista(DentistaDto dentistadto) {
         log.info("[DentistaService] [saveDentista]");
         try {
             mapper.registerModule(new JavaTimeModule());
@@ -74,25 +79,14 @@ public class DentistaServiceImpl implements DentistaService {
     public ResponseEntity<DentistaDto> updateDentistaByMatricula(DentistaDto dentistadto) {
         log.info("[DentistaService] [updateDentistaById]");
         try{
-//            DentistaDto dentistaDto = findDentistaById(dentista.getId()).getBody();
+            Dentista dentistaResponse = responseDentistaByMatricula(dentistadto.getMatricula());
             mapper.registerModule(new JavaTimeModule());
-            Optional<Dentista> dentistaResponse = dentistaRepository.findByMatricula(dentistadto.getMatricula());
-            if(dentistaResponse.isEmpty()) {
-                return new ResponseEntity("Dentista não foi encontrado",HttpStatus.NOT_FOUND);
-            }
-            Dentista dentista = dentistaResponse.get();
-
-            if(dentistadto.getNome() != null) {
-                dentista.setNome(dentistadto.getNome());
-            }
-            if(dentistadto.getSobrenome() != null) {
-                dentista.setSobrenome(dentistadto.getSobrenome());
-            }
-
-            return ResponseEntity.status(HttpStatus.CREATED).body(mapper.convertValue(dentistaRepository.save(dentista), DentistaDto.class));
+            Dentista dentista = mapper.convertValue(dentistadto,Dentista.class);
+            dentista.setId(dentistaResponse.getId());
+            return ResponseEntity.status(HttpStatus.OK).body(mapper.convertValue(dentistaRepository.save(dentista), DentistaDto.class));
         }catch (Exception e){
-            log.error("[DentistaService] [updateDentistaById] Erro ao encontrar dentista", e);
-            return new ResponseEntity("Dentista não foi encontrado",HttpStatus.NOT_FOUND);
+            log.error("[DentistaService] [updateDentistaById] Erro ao atualizar os dados do dentista.", e);
+            return new ResponseEntity("Não foi possivel atualizar o(a) Dentista.",HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -101,12 +95,12 @@ public class DentistaServiceImpl implements DentistaService {
         log.info("[DentistaService] [deleteDentista]");
         try {
             Dentista dentista = responseDentistaByMatricula(matricula);
-            List<Consulta> consulta = consultaRepository.findByDentistaMatricula(dentista.getMatricula());
-            if(consulta.isEmpty()) {
-                dentistaRepository.deleteById(dentista.getId());
-                return ResponseEntity.status(HttpStatus.OK).body("Dentista excluido com sucesso.");
-            }
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Existem Consultas cadastradas neste Dentista");
+            if(consultaService. existeConsultaByMatricula(dentista.getMatricula()).size() > 0)
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Existem consultas registradas para: "+ dentista.getNome() +" "+dentista.getSobrenome());
+
+            dentistaRepository.deleteById(dentista.getId());
+            return ResponseEntity.status(HttpStatus.OK).body("Dentista excluido com sucesso.");
+
         }catch (Exception e){
             log.error("[DentistaService] [deleteDentista] Erro ao excluir Dentista", e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao excluir o Dentista" );
