@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -27,6 +28,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
    @Autowired
    AutenticacaoService autenticacaoService;
+
+   @Autowired
+   AutenticacaoViaTokenFilter autenticacaoViaTokenFilter;
 
    @Bean
    @Override
@@ -48,7 +52,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
               .antMatchers("/auth").permitAll()
 //              bloqueia o acesso a qualquer outra rota não informado a cima
               .anyRequest().authenticated()
-              .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+              .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+              .and().addFilterBefore(autenticacaoViaTokenFilter, UsernamePasswordAuthenticationFilter.class);
    }
 
 //   Aqui cuidamos da parte de autenticação de acesso

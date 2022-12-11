@@ -1,6 +1,7 @@
 package com.dh.clinicaodonto.security;
 
 import com.dh.clinicaodonto.domain.Usuario;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,5 +31,21 @@ public class TokenService {
               .setExpiration(dataExpiracao)
               .signWith(SignatureAlgorithm.HS256, this.secret)
               .compact();
+   }
+
+   public boolean verificaToken(String token) {
+      try{
+         Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token);
+         return true;
+      }catch(Exception e){
+         return false;
+      }
+
+   }
+
+   public String getUsernameUsuario(String token) {
+      Claims claims = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
+      String username = claims.getSubject();
+      return username;
    }
 }
