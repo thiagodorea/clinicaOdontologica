@@ -18,6 +18,10 @@
 
 
 <h3 align="center">:bookmark_tabs: Documentação: <a href="https://documenter.getpostman.com/view/10174062/2s8YzUyhFP"> https://documenter.getpostman.com/view/10174062/2s8YzUyhFP </a>  </h3>
+<h4 align="center"> Importante: Para utilizar todas as funções necessário utilizar o login e enviar o token em cada requisição.
+- Login <strong> master </strong>
+- Senha <strong> 123456 </strong>
+</h4>
 
 ### :closed_book: Bibliotecas utilizadas
 - Java 17
