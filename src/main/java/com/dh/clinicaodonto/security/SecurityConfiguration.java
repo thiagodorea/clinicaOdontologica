@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -51,6 +52,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
               .antMatchers("/h2-console/**").permitAll()
               .antMatchers("/auth").permitAll()
               .antMatchers("/usuario/**").permitAll()
+              .antMatchers(HttpMethod.POST,"/dentistas").permitAll()
+              .antMatchers(HttpMethod.POST,"/pacientes").permitAll()
               .antMatchers("/perfis/**").hasAnyAuthority("Administrador")
               .antMatchers("/dentistas/**").hasAnyAuthority("Administrador")
               .antMatchers("/pacientes/**").hasAnyAuthority("Administrador")

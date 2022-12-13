@@ -1,6 +1,5 @@
 package com.dh.clinicaodonto.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,7 +17,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PacienteDto {
+public class PacienteResponseDto {
     @NotBlank(message = "Nome do paciente é obrigatório.")
     @Size(min=2, max=50, message = "O nome precisa ser maior que 2 e nenor que 50 caracteres.")
     private String nome;
@@ -30,6 +29,5 @@ public class PacienteDto {
     private String rg;
     private LocalDate dataCadastro;
     private EnderecoDto endereco;
-    private UsuarioNovoDto usuario;
 
 }

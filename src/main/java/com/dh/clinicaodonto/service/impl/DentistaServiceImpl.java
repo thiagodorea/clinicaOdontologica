@@ -2,8 +2,13 @@ package com.dh.clinicaodonto.service.impl;
 
 import com.dh.clinicaodonto.domain.Consulta;
 import com.dh.clinicaodonto.domain.Dentista;
+import com.dh.clinicaodonto.domain.Endereco;
 import com.dh.clinicaodonto.domain.Paciente;
+import com.dh.clinicaodonto.domain.Usuario;
 import com.dh.clinicaodonto.dto.DentistaDto;
+import com.dh.clinicaodonto.dto.DentistaResponseDto;
+import com.dh.clinicaodonto.dto.PerfilDto;
+import com.dh.clinicaodonto.dto.UsuarioNovoDto;
 import com.dh.clinicaodonto.repository.ConsultaRepository;
 import com.dh.clinicaodonto.repository.DentistaRepository;
 import com.dh.clinicaodonto.service.DentistaService;
@@ -14,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -32,24 +38,25 @@ public class DentistaServiceImpl implements DentistaService {
     @Autowired
     private ConsultaServiceImpl consultaService;
 
+    BCryptPasswordEncoder enc = new BCryptPasswordEncoder();
     @Override
-    public List<DentistaDto> findAllDenstistas() {
+    public List<DentistaResponseDto> findAllDenstistas() {
         log.info("[DentistaService] [findAllDentistas]");
         List<Dentista> dentistas = dentistaRepository.findAll();
-        List<DentistaDto> dentistasDto = new ArrayList<>();
+        List<DentistaResponseDto> dentistasResponseDto = new ArrayList<>();
         mapper.registerModule(new JavaTimeModule());
         for(Dentista dentista : dentistas) {
-            dentistasDto.add(mapper.convertValue(dentista, DentistaDto.class));
+            dentistasResponseDto.add(mapper.convertValue(dentista, DentistaResponseDto.class));
         }
-        return dentistasDto;
+        return dentistasResponseDto;
     }
 
     @Override
-    public ResponseEntity<DentistaDto> findByMatricula(String matricula) {
+    public ResponseEntity<DentistaResponseDto> findByMatricula(String matricula) {
         log.info("[DentistaService] [findByMatricula]");
         mapper.registerModule(new JavaTimeModule());
         try{
-            return ResponseEntity.status(HttpStatus.OK).body(mapper.convertValue(dentistaRepository.findByMatricula(matricula).get(), DentistaDto.class));
+            return ResponseEntity.status(HttpStatus.OK).body(mapper.convertValue(dentistaRepository.findByMatricula(matricula).get(), DentistaResponseDto.class));
         }catch(Exception e){
             return new ResponseEntity("O Dentista não foi localizado.",HttpStatus.BAD_REQUEST);
         }
@@ -57,15 +64,21 @@ public class DentistaServiceImpl implements DentistaService {
 
     @Override
     @Transactional
-    public ResponseEntity<DentistaDto> saveDentista(DentistaDto dentistadto) {
+    public ResponseEntity<DentistaResponseDto> saveDentista(DentistaDto dentistadto) {
         log.info("[DentistaService] [saveDentista]");
         try {
             mapper.registerModule(new JavaTimeModule());
-
+            List<PerfilDto> perfisDto = new ArrayList<>();
+            perfisDto.add(new PerfilDto(2L,null));
+            UsuarioNovoDto usuarioNovoDto = new UsuarioNovoDto();
+            usuarioNovoDto.setUsername(dentistadto.getMatricula());
+            usuarioNovoDto.setPassword(enc.encode(dentistadto.getUsuario().getPassword()));
+            usuarioNovoDto.setPerfis(perfisDto);
+            dentistadto.setUsuario(usuarioNovoDto);
             Optional<Dentista> alreadyExists = dentistaRepository.findByMatricula(dentistadto.getMatricula());
             if(alreadyExists.isEmpty()) {
                 Dentista dentista = mapper.convertValue(dentistadto, Dentista.class);
-                return ResponseEntity.status(HttpStatus.CREATED).body(mapper.convertValue(dentistaRepository.save(dentista), DentistaDto.class));
+                return ResponseEntity.status(HttpStatus.CREATED).body(mapper.convertValue(dentistaRepository.save(dentista), DentistaResponseDto.class));
             }
             log.error("[DentistaService] [saveDentista] matricula "+ dentistadto.getMatricula() + " já cadastrada no sistema");
             return new ResponseEntity( "matricula "+ dentistadto.getMatricula() + " já cadastrada no sistema",HttpStatus.BAD_REQUEST);
@@ -76,14 +89,17 @@ public class DentistaServiceImpl implements DentistaService {
 
     }
     @Override
-    public ResponseEntity<DentistaDto> updateDentistaByMatricula(DentistaDto dentistadto) {
+    public ResponseEntity<DentistaResponseDto> updateDentistaByMatricula(DentistaDto dentistadto) {
         log.info("[DentistaService] [updateDentistaById]");
+        mapper.registerModule(new JavaTimeModule());
         try{
             Dentista dentistaResponse = responseDentistaByMatricula(dentistadto.getMatricula());
-            mapper.registerModule(new JavaTimeModule());
+            Usuario usuario = new Usuario();
+            usuario.setId(dentistaResponse.getUsuario().getId());
             Dentista dentista = mapper.convertValue(dentistadto,Dentista.class);
             dentista.setId(dentistaResponse.getId());
-            return ResponseEntity.status(HttpStatus.OK).body(mapper.convertValue(dentistaRepository.save(dentista), DentistaDto.class));
+            dentista.setUsuario(usuario);
+            return ResponseEntity.status(HttpStatus.OK).body(mapper.convertValue(dentistaRepository.save(dentista), DentistaResponseDto.class));
         }catch (Exception e){
             log.error("[DentistaService] [updateDentistaById] Erro ao atualizar os dados do dentista.", e);
             return new ResponseEntity("Não foi possivel atualizar o(a) Dentista.",HttpStatus.BAD_REQUEST);
