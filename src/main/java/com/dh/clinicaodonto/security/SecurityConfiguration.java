@@ -57,6 +57,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
               .antMatchers("/perfis/**").hasAnyAuthority("Administrador")
               .antMatchers("/dentistas/**").hasAnyAuthority("Administrador")
               .antMatchers("/pacientes/**").hasAnyAuthority("Administrador")
+              .antMatchers(HttpMethod.GET,"/usuario/perfil/**").hasAnyAuthority("Administrador")
 //              bloqueia o acesso a qualquer outra rota não informado a cima
               .anyRequest().authenticated()
               .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
