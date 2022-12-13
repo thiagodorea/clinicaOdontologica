@@ -17,7 +17,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgQ2xpbmljYU9kb250byIsInN1YiI6Ik1hc3RlciIsImlhdCI6MTY3MDczMDgzMywiZXhwIjoxNjcwNzMxMDczfQ.xsAANHotZOnj1w1881K4d3MH1ULOEcTslJqi5dC-UAQ",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgQ2xpbmljYU9kb250byIsInN1YiI6IjM0NTQ2OCIsImlhdCI6MTY3MDk1NDMwNiwiZXhwIjoxNjcwOTU0NTQ2fQ.yOORqZyeUDgpCbWSW3aRf7XseqRILJSKcR0pGUHvtFI",
 									"type": "string"
 								}
 							]
@@ -44,7 +44,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgQ2xpbmljYU9kb250byIsInN1YiI6Ik1hc3RlciIsImlhdCI6MTY3MDczMDAzMiwiZXhwIjoxNjcwNzMwMjcyfQ.HIIfFBrcP_cgU7acHNWsZNKwNSVYcxpYOuv4xw1z5NE",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgQ2xpbmljYU9kb250byIsInN1YiI6IjM0NTQ2OCIsImlhdCI6MTY3MDk1NDMwNiwiZXhwIjoxNjcwOTU0NTQ2fQ.yOORqZyeUDgpCbWSW3aRf7XseqRILJSKcR0pGUHvtFI",
 									"type": "string"
 								}
 							]
@@ -81,7 +81,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n \"nome\" : \"Ettore\",\r\n \"sobrenome\" : \"Muniz\",\r\n \"matricula\" : \"345468\"\r\n}",
+							"raw": "{\r\n    \"nome\" : \"Ettore\",\r\n    \"sobrenome\" : \"Muniz\",\r\n    \"matricula\" : \"345468\",\r\n    \"usuario\":{\r\n        \"password\": \"123456\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -136,12 +136,12 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgQ2xpbmljYU9kb250byIsInN1YiI6Ik1hc3RlciIsImlhdCI6MTY3MDczMDAzMiwiZXhwIjoxNjcwNzMwMjcyfQ.HIIfFBrcP_cgU7acHNWsZNKwNSVYcxpYOuv4xw1z5NE",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgQ2xpbmljYU9kb250byIsInN1YiI6Im1hc3RlciIsImlhdCI6MTY3MDk1NTI4MiwiZXhwIjoxNjcwOTU1NTIyfQ.eqbxzFhF84ficowB7JG7FW9-F4rqe9Ge0A513kwcH6c",
 									"type": "string"
 								}
 							]
 						},
-						"method": "PUT",
+						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -177,7 +177,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgQ2xpbmljYU9kb250byIsInN1YiI6Ik1hc3RlciIsImlhdCI6MTY3MDczMDgzMywiZXhwIjoxNjcwNzMxMDczfQ.xsAANHotZOnj1w1881K4d3MH1ULOEcTslJqi5dC-UAQ",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgQ2xpbmljYU9kb250byIsInN1YiI6Im1hc3RlciIsImlhdCI6MTY3MDk2MjI5MCwiZXhwIjoxNjcwOTYyNTMwfQ.6NGul4tk7XqQ4E0GPLhY2eRQ0Bo_HWe7IJ7DdtyPj-k",
 									"type": "string"
 								}
 							]
@@ -204,7 +204,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgQ2xpbmljYU9kb250byIsInN1YiI6Ik1hc3RlciIsImlhdCI6MTY3MDczMDgzMywiZXhwIjoxNjcwNzMxMDczfQ.xsAANHotZOnj1w1881K4d3MH1ULOEcTslJqi5dC-UAQ",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgQ2xpbmljYU9kb250byIsInN1YiI6Im1hc3RlciIsImlhdCI6MTY3MDk2MjI5MCwiZXhwIjoxNjcwOTYyNTMwfQ.6NGul4tk7XqQ4E0GPLhY2eRQ0Bo_HWe7IJ7DdtyPj-k",
 									"type": "string"
 								}
 							]
@@ -212,13 +212,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/pacientes/383959408",
+							"raw": "{{host}}/pacientes/419234664",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"pacientes",
-								"383959408"
+								"419234664"
 							]
 						}
 					},
@@ -232,7 +232,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgQ2xpbmljYU9kb250byIsInN1YiI6Ik1hc3RlciIsImlhdCI6MTY3MDcxOTg0OCwiZXhwIjoxNjcwNzIwMDg4fQ.w1NspyAXf0NwmDB0SZUxcjm8sg0S3vgFB7uwKwHpP0I",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgQ2xpbmljYU9kb250byIsInN1YiI6Im1hc3RlciIsImlhdCI6MTY3MDk2MjI5MCwiZXhwIjoxNjcwOTYyNTMwfQ.6NGul4tk7XqQ4E0GPLhY2eRQ0Bo_HWe7IJ7DdtyPj-k",
 									"type": "string"
 								}
 							]
@@ -241,7 +241,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": " {\r\n    \"nome\": \"Larissa\",\r\n    \"sobrenome\": \"Natália Rodrigues\",\r\n    \"rg\": \"251660369\",\r\n    \"endereco\": {\r\n        \"cep\": \"05546-030\",\r\n        \"logradouro\": \"Praça Professor Vasco de Andrade\",\r\n        \"numero\": \"427\",\r\n        \"bairro\": \"Jardim Cláudia\",\r\n        \"localidade\": \"São Paulo\",\r\n        \"uf\": \"SP\"\r\n    }\r\n}",
+							"raw": " {\r\n    \"nome\": \"Larissa\",\r\n    \"sobrenome\": \"Natália Rodrigues\",\r\n    \"rg\": \"251660369\",\r\n    \"endereco\": {\r\n        \"cep\": \"05546-030\",\r\n        \"logradouro\": \"Praça Professor Vasco de Andrade\",\r\n        \"numero\": \"427\",\r\n        \"bairro\": \"Jardim Cláudia\",\r\n        \"localidade\": \"São Paulo\",\r\n        \"uf\": \"SP\"\r\n    },\r\n    \"usuario\":{\r\n        \"password\": \"123456\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -268,7 +268,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgQ2xpbmljYU9kb250byIsInN1YiI6Ik1hc3RlciIsImlhdCI6MTY3MDcxOTg0OCwiZXhwIjoxNjcwNzIwMDg4fQ.w1NspyAXf0NwmDB0SZUxcjm8sg0S3vgFB7uwKwHpP0I",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgQ2xpbmljYU9kb250byIsInN1YiI6Im1hc3RlciIsImlhdCI6MTY3MDk2MjI5MCwiZXhwIjoxNjcwOTYyNTMwfQ.6NGul4tk7XqQ4E0GPLhY2eRQ0Bo_HWe7IJ7DdtyPj-k",
 									"type": "string"
 								}
 							]
@@ -296,16 +296,16 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgQ2xpbmljYU9kb250byIsInN1YiI6Ik1hc3RlciIsImlhdCI6MTY3MDcxOTg0OCwiZXhwIjoxNjcwNzIwMDg4fQ.w1NspyAXf0NwmDB0SZUxcjm8sg0S3vgFB7uwKwHpP0I",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgQ2xpbmljYU9kb250byIsInN1YiI6Im1hc3RlciIsImlhdCI6MTY3MDk2MjI5MCwiZXhwIjoxNjcwOTYyNTMwfQ.6NGul4tk7XqQ4E0GPLhY2eRQ0Bo_HWe7IJ7DdtyPj-k",
 									"type": "string"
 								}
 							]
 						},
-						"method": "PUT",
+						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"Luiz\",\r\n    \"sobrenome\": \"Samuel Luan Almada\",\r\n    \"rg\": \"383959408\",\r\n    \"dataCadastro\": \"2020-04-01\",\r\n    \"endereco\": {\r\n        \"cep\": \"05546-030\",\r\n        \"logradouro\": \"Praça Professor Vasco de Andrade\",\r\n        \"numero\": \"427\",\r\n        \"bairro\": \"Jardim Cláudia\",\r\n        \"localidade\": \"São Paulo\",\r\n        \"uf\": \"SP\"\r\n    }\r\n}\r\n",
+							"raw": " {\r\n    \"nome\": \"Larissa\",\r\n    \"sobrenome\": \"Natália Melo Rodrigues\",\r\n    \"rg\": \"251660369\",\r\n    \"endereco\": {\r\n        \"cep\": \"05546-030\",\r\n        \"logradouro\": \"Praça Professor Vasco de Andrade\",\r\n        \"numero\": \"427\",\r\n        \"bairro\": \"Jardim Cláudia\",\r\n        \"localidade\": \"São Paulo\",\r\n        \"uf\": \"SP\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -337,7 +337,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgQ2xpbmljYU9kb250byIsInN1YiI6InVzZXJjb211biIsImlhdCI6MTY3MDcyOTgyNCwiZXhwIjoxNjcwNzMwMDY0fQ.CxL2IOBkC3TsMYPIvAXggGUQjNBEukRs3DKg5L3Hhao",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgQ2xpbmljYU9kb250byIsInN1YiI6Im1hc3RlciIsImlhdCI6MTY3MDk2MjI5MCwiZXhwIjoxNjcwOTYyNTMwfQ.6NGul4tk7XqQ4E0GPLhY2eRQ0Bo_HWe7IJ7DdtyPj-k",
 									"type": "string"
 								}
 							]
@@ -364,7 +364,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgQ2xpbmljYU9kb250byIsInN1YiI6Ik1hc3RlciIsImlhdCI6MTY3MDcyMDkxOSwiZXhwIjoxNjcwNzIxMTU5fQ.BB3sndnBo659qBuReowcEeJjgS_ncpnCb2pefCfMUvI",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgQ2xpbmljYU9kb250byIsInN1YiI6Im1hc3RlciIsImlhdCI6MTY3MDk2MjI5MCwiZXhwIjoxNjcwOTYyNTMwfQ.6NGul4tk7XqQ4E0GPLhY2eRQ0Bo_HWe7IJ7DdtyPj-k",
 									"type": "string"
 								}
 							]
@@ -372,13 +372,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/consultas/277384904",
+							"raw": "{{host}}/consultas/383959408",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"consultas",
-								"277384904"
+								"383959408"
 							]
 						}
 					},
@@ -392,7 +392,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgQ2xpbmljYU9kb250byIsInN1YiI6Ik1hc3RlciIsImlhdCI6MTY3MDcyMDkxOSwiZXhwIjoxNjcwNzIxMTU5fQ.BB3sndnBo659qBuReowcEeJjgS_ncpnCb2pefCfMUvI",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgQ2xpbmljYU9kb250byIsInN1YiI6Im1hc3RlciIsImlhdCI6MTY3MDk2MjI5MCwiZXhwIjoxNjcwOTYyNTMwfQ.6NGul4tk7XqQ4E0GPLhY2eRQ0Bo_HWe7IJ7DdtyPj-k",
 									"type": "string"
 								}
 							]
@@ -428,7 +428,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgQ2xpbmljYU9kb250byIsInN1YiI6Ik1hc3RlciIsImlhdCI6MTY3MDcxOTg0OCwiZXhwIjoxNjcwNzIwMDg4fQ.w1NspyAXf0NwmDB0SZUxcjm8sg0S3vgFB7uwKwHpP0I",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgQ2xpbmljYU9kb250byIsInN1YiI6Im1hc3RlciIsImlhdCI6MTY3MDk2MjI5MCwiZXhwIjoxNjcwOTYyNTMwfQ.6NGul4tk7XqQ4E0GPLhY2eRQ0Bo_HWe7IJ7DdtyPj-k",
 									"type": "string"
 								}
 							]
@@ -504,7 +504,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"Master\",\r\n    \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n    \"username\": \"master\",\r\n    \"password\": \"123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -518,6 +518,64 @@
 							],
 							"path": [
 								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Novo Usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Thiago\",\r\n    \"password\": \"1a2b3c\",\r\n    \"perfis\":[\r\n        {\r\n            \"id\": 1\r\n        },\r\n          {\r\n            \"id\": 2\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/usuario",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Perfil",
+			"item": [
+				{
+					"name": "Listar Perfis",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgQ2xpbmljYU9kb250byIsInN1YiI6IlVzZXJNYXN0ZXIiLCJpYXQiOjE2NzA4OTUyMjgsImV4cCI6MTY3MDg5NTQ2OH0.1H7yWszMBSlLNm7SxBvp90js9pbqHtAP971loUUxnPg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/perfis",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"perfis"
 							]
 						}
 					},

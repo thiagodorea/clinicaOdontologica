@@ -19,7 +19,7 @@ public class CreateUserRun implements ApplicationRunner {
       BCryptPasswordEncoder enc = new BCryptPasswordEncoder();
 
       Usuario usuario =new Usuario();
-      usuario.setUsername("Master");
+      usuario.setUsername("UserMaster");
       usuario.setPassword(enc.encode("123456"));
 
       if(usuarioRepository.findAll().size() == 0)

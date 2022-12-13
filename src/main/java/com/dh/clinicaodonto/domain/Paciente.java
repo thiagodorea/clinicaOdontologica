@@ -40,4 +40,7 @@ public class Paciente {
    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
    @JoinColumn(name = "endereco_id")
    private Endereco endereco;
+   @OneToOne(cascade = CascadeType.PERSIST)
+   @JoinColumn(name = "usuario_id")
+   private Usuario usuario;
 }

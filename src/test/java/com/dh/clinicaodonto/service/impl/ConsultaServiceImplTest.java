@@ -54,7 +54,7 @@ class ConsultaServiceImplTest {
 
    @Test
    void deleteConsulta() throws ResourceNotFoundException {
-      ConsultaMarcacaoDto consultaMarcacaoDto = new ConsultaMarcacaoDto(1, LocalDateTime.now(),"277384904","0000003");
+      ConsultaMarcacaoDto consultaMarcacaoDto = new ConsultaMarcacaoDto(1, LocalDateTime.now(),"252713333","0000003");
       assertEquals(200,service.deleteConsulta(consultaMarcacaoDto).getStatusCode().value());
    }
 }

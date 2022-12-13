@@ -2,6 +2,7 @@ package com.dh.clinicaodonto.controller;
 
 import com.dh.clinicaodonto.domain.Dentista;
 import com.dh.clinicaodonto.dto.DentistaDto;
+import com.dh.clinicaodonto.dto.DentistaResponseDto;
 import com.dh.clinicaodonto.service.impl.DentistaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,24 +29,24 @@ public class DentistaController {
 
     @GetMapping()
 
-    public List<DentistaDto> findAllDentistas(){
+    public List<DentistaResponseDto> findAllDentistas(){
         return dentistaService.findAllDenstistas();
     }
 
     @GetMapping("{matricula}")
-    public ResponseEntity<DentistaDto> findByMatricula(@PathVariable String matricula){
+    public ResponseEntity<DentistaResponseDto> findByMatricula(@PathVariable String matricula){
         return dentistaService.findByMatricula(matricula);
     }
 
     @PostMapping()
     @ResponseBody
-    public ResponseEntity<DentistaDto> saveDentista(@RequestBody DentistaDto dentistaDto){
+    public ResponseEntity<DentistaResponseDto> saveDentista(@RequestBody DentistaDto dentistaDto){
         return dentistaService.saveDentista(dentistaDto);
     }
 
-    @PutMapping()
+    @PatchMapping()
     @ResponseBody
-    public ResponseEntity<DentistaDto> updateDentista(@RequestBody @Valid DentistaDto dentistadto){
+    public ResponseEntity<DentistaResponseDto> updateDentista(@RequestBody @Valid DentistaDto dentistadto){
         return dentistaService.updateDentistaByMatricula(dentistadto);
     }
 
