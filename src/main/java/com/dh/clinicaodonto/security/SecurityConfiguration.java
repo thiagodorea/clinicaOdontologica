@@ -50,7 +50,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
               .authorizeRequests()
 //              permite acesso ao metodo get da rota informada
               .antMatchers("/h2-console/**").permitAll()
-              .antMatchers("/auth").permitAll()
+              .antMatchers("/auth","v3/api-docs/**","/swagger-ui/**").permitAll()
               .antMatchers("/usuario/**").permitAll()
               .antMatchers(HttpMethod.POST,"/dentistas").permitAll()
               .antMatchers(HttpMethod.POST,"/pacientes").permitAll()
