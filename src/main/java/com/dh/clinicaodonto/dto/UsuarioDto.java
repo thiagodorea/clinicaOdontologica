@@ -26,4 +26,12 @@ public class UsuarioDto {
    public UsernamePasswordAuthenticationToken converter(){
       return new UsernamePasswordAuthenticationToken(this.username, this.password);
    }
+
+   public String getUsername() {
+      return username.toLowerCase();
+   }
+
+   public void setUsername(String username) {
+      this.username = username.toLowerCase();
+   }
 }

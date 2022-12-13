@@ -27,4 +27,12 @@ public class UsuarioNovoDto {
    @Length(min = 5, max = 90)
    private String password;
    private List<PerfilDto> perfis;
+
+   public String getUsername() {
+      return username.toLowerCase();
+   }
+
+   public void setUsername(String username) {
+      this.username = username.toLowerCase();
+   }
 }
