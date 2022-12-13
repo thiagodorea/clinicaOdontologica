@@ -1,5 +1,6 @@
 package com.dh.clinicaodonto.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,21 +10,21 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 import javax.validation.constraints.NotBlank;
+import java.util.List;
+
 
 @Getter
 @Setter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class UsuarioDto {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class UsuarioNovoDto {
    @NotBlank
    @Length(min = 5, max = 20)
    private String username;
    @NotBlank
    @Length(min = 5, max = 90)
    private String password;
-
-   public UsernamePasswordAuthenticationToken converter(){
-      return new UsernamePasswordAuthenticationToken(this.username, this.password);
-   }
+   private List<PerfilDto> perfis;
 }

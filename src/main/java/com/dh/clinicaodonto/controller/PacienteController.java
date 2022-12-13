@@ -38,7 +38,6 @@ public class PacienteController {
    @PostMapping()
    @ResponseBody
    public ResponseEntity<PacienteDto> savePaciente(@RequestBody @Valid PacienteDto pacienteDto){
-      System.out.println(pacienteDto);
       return pacienteService.savePaciente(pacienteDto);
    }
 
