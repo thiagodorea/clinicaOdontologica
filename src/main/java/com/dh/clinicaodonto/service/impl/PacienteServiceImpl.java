@@ -24,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Log4j2
 @Service
@@ -100,7 +101,8 @@ public class PacienteServiceImpl implements PacienteService {
       try{
          Paciente pacienteResponse = responsePacienteByRg(pacienteDto.getRg());
          Endereco endereco = mapper.convertValue(pacienteDto.getEndereco(), Endereco.class);
-         endereco.setId(pacienteResponse.getEndereco().getId());
+         if(!Objects.isNull(pacienteResponse.getEndereco()))
+            endereco.setId(pacienteResponse.getEndereco().getId());
          Usuario usuario = new Usuario();
          usuario.setId(pacienteResponse.getUsuario().getId());
 

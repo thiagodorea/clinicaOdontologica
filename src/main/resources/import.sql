@@ -43,7 +43,7 @@ INSERT INTO paciente(nome, sobrenome, rg, data_cadastro,endereco_id,usuario_id) 
 
 INSERT INTO consulta(consulta_id,paciente_id, dentista_id, dh_consulta) VALUES(1,1,2, '2022-12-29 11:00');
 INSERT INTO consulta(consulta_id,paciente_id, dentista_id, dh_consulta) VALUES(1,2,1, '2022-12-29 09:00');
-INSERT INTO consulta(consulta_id,paciente_id, dentista_id, dh_consulta) VALUES(1,2,3, '2022-12-29 10:00');
+INSERT INTO consulta(consulta_id,paciente_id, dentista_id, dh_consulta) VALUES(2,2,3, '2022-12-29 10:00');
 
 
 
