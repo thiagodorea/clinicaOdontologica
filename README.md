@@ -25,16 +25,19 @@
 <h3 align="center">:bookmark_tabs: Documentação: <a href="https://documenter.getpostman.com/view/10174062/2s8YzUyhFP"> https://documenter.getpostman.com/view/10174062/2s8YzUyhFP </a>  </h3>
 <br>
 <br>
-~~~~
-I M P O R T A N T E
+
+<strong>
+
+*I M P O R T A N T E*
  
 Para utilizar todas as funções necessário utilizar o login e enviar o token em cada requisição.
 - Login:  master 
 - Senha:  123456 
 
 * Ao se criar um paciente o login será o RG
-* Ao se criar um Dentista o login será a MATRICULA 
-~~~~
+* Ao se criar um Dentista o login será a MATRICULA
+
+</strong>
 
 ### :closed_book: Bibliotecas utilizadas
 - Java 17
