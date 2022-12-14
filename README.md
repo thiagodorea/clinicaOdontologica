@@ -23,6 +23,7 @@
 <br>
 
 <h3 align="center">:bookmark_tabs: Documentação: <a href="https://documenter.getpostman.com/view/10174062/2s8YzUyhFP"> https://documenter.getpostman.com/view/10174062/2s8YzUyhFP </a>  </h3>
+
 <br>
 <br>
 
@@ -38,8 +39,10 @@ Para utilizar todas as funções necessário utilizar o login e enviar o token e
 * Ao se criar um Dentista o login será a MATRICULA
 
 </strong>
+
 <br>
 <br>
+
 ### :closed_book: Bibliotecas utilizadas
 - Java 17
 - Spring Boot
