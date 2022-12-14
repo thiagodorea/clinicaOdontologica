@@ -38,7 +38,8 @@ Para utilizar todas as funções necessário utilizar o login e enviar o token e
 * Ao se criar um Dentista o login será a MATRICULA
 
 </strong>
-
+<br>
+<br>
 ### :closed_book: Bibliotecas utilizadas
 - Java 17
 - Spring Boot
