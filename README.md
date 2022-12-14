@@ -56,7 +56,3 @@ de consultas:
 - <strong> Administração de pacientes: </strong> Registrar, modificar e excluir pacientes. De cada um se armazenam: nome, sobrenome, endereço, RG, data de cadastro.
 - <strong> Login: </strong> Validar a entrada no sistema por meio de um login com nome de usuário e senha. Permitir que qualquer pessoa logada registre uma consulta, mas apenas aqueles que têm uma função de administração pode gerenciar dentistas e pacientes.
 - <strong> Registrar consulta: </strong> Deve ser possível permitir que um paciente seja atribuído a uma consulta com um dentista em uma determinada data e hora.
-
-
-
-###
