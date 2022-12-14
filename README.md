@@ -1,23 +1,34 @@
 ﻿<h1 align="center">:point_up: CheckPoint</h1>
 <h1 align="center">Clinica Odontologica.</h1>
+<h2 align="center">Projeto integrador de BeckEnd DH -API de reserva de consultas </h2>
 
+<br>
+<br>
 <div align="center">
 <img style="display: block; margin: auto;" alt="versão" src="https://img.shields.io/badge/Vers%C3%A3o-1.0.0-blue?style=plastic&logo=exercism">
 <img style="display: block; margin: auto;" alt="progresso" src="https://img.shields.io/badge/progresso-100%25-green?style=plastic&logo=lastpass">
 
 </div>
 
-<h2 align="center">Projeto integrador de BeckEnd DH -API de reserva de consultas </h2>
 
+<br>
+<br>
 <p align="center">
  <a href="#">Alan Menezes</a> • 
  <a href="#">Ettore Muniz</a> •
  <a href="#">Thiago Dorea Alves</a> • 
 </p>
 
-
+<br>
+<br>
 
 <h3 align="center">:bookmark_tabs: Documentação: <a href="https://documenter.getpostman.com/view/10174062/2s8YzUyhFP"> https://documenter.getpostman.com/view/10174062/2s8YzUyhFP </a>  </h3>
+<br>
+<br>
+#### Importante: Para utilizar todas as funções necessário utilizar o login e enviar o token em cada requisição.
+- Login <strong> master </strong>
+- Senha <strong> 123456 </strong>
+
 
 ### :closed_book: Bibliotecas utilizadas
 - Java 17
